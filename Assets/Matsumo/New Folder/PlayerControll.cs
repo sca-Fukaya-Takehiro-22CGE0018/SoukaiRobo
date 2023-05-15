@@ -15,17 +15,23 @@ public class PlayerControll : MonoBehaviour
     GameObject BulletPrefab1; //í èÌíe
     [SerializeField]
     GameObject BulletPrefab2; //ã≠Ç¢íe CTÇ†ÇË
-
+    [SerializeField]
+    float Hp = 0;
     public float Bullet1Power = 1;
     private bool jumpflag = false; //íÖínîªíË
     private bool isShoot = true; //CTóp
 
     private Vector2 velocity;
     private Vector3 BulletPoint; //íeÇÃî≠éÀínì_
+
+    private EnemyControll  enemyControll;
+    private TracEnemy tracEnemy;
     // Start is called before the first frame update
     void Start()
     {
         BulletPoint = transform.Find("BulletPoint").localPosition;
+        this.enemyControll = FindObjectOfType<EnemyControll>();
+        this.tracEnemy = FindObjectOfType<TracEnemy>();
     }
 
     // Update is called once per frame
@@ -69,13 +75,17 @@ public class PlayerControll : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collision.CompareTag("Stage"))
+        if (collider2D.gameObject.tag == "Stage")
         {
             jumpflag = false;
         }
-        if (collision.CompareTag("Enemy"))
+        if (collider2D.gameObject.tag == "Enemy")
+        {
+            Hp = Hp -= enemyControll.EnemyBulletPower;
+        }
+        if(collider2D.gameObject.tag == "tracEnemy")
         {
 
         }
