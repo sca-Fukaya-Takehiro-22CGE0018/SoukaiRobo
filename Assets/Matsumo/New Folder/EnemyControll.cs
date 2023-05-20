@@ -16,6 +16,7 @@ public class EnemyControll : MonoBehaviour
 
     private Vector3 EnemyBulletPoint;
 
+    private int count;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,14 +30,19 @@ public class EnemyControll : MonoBehaviour
         ShootTime -= Time.deltaTime;
         if (ShootTime <= 0)
         {
-            EnemyFire();
-            ShootTime = 5.0f;
+           StartCoroutine(nameof(EnemyFire));
+           ShootTime = 5.0f;
         }
     }
 
-    void EnemyFire()
-    {
-        Instantiate(EnemyBullet, transform.position + EnemyBulletPoint, Quaternion.identity);
+    private IEnumerator EnemyFire()
+    { 
+        for(int i = 0;i < 3; i++)
+        {
+            Instantiate(EnemyBullet, transform.position + EnemyBulletPoint, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)
