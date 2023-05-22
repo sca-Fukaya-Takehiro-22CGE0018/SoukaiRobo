@@ -7,44 +7,59 @@ public class EnemyControll : MonoBehaviour
     [SerializeField]
     GameObject EnemyBullet;
     [SerializeField]
-    float ShootTime = 5.0f;
+    Transform EnemyBulletPoint;
+    [SerializeField]
+    float bulletSpeed;
+    [SerializeField]
+    float delay;
+    [SerializeField]
+    int burstCount = 3;
+    [SerializeField]
+    float burstInterval = 0.02f;
 
+    [SerializeField] Transform playerTransform;
     public float hp = 0;
     public float EnemyBulletPower = 1;
-
     private PlayerControll playerControll;
-
-    private Vector3 EnemyBulletPoint;
-
-    private int count;
     // Start is called before the first frame update
     void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         this.playerControll = FindObjectOfType<PlayerControll>();
-        EnemyBulletPoint = transform.Find("EnemyBulletPoint").localPosition;
+        InvokeRepeating("SpawnBulletBurst", delay, delay);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShootTime -= Time.deltaTime;
-        if (ShootTime <= 0)
+
+    }
+
+    private void SpawnBulletBurst()
+    {
+        if (playerTransform != null)
         {
-           StartCoroutine(nameof(EnemyFire));
-           ShootTime = 5.0f;
+            Vector3 targetPosition = playerTransform.position;
+            StartCoroutine(SpawnBullets(targetPosition));
         }
     }
 
-    private IEnumerator EnemyFire()
-    { 
-        for(int i = 0;i < 3; i++)
+    private IEnumerator SpawnBullets(Vector3 targetPosition)
+    {
+        for (int i = 0; i < burstCount; i++)
         {
-            Instantiate(EnemyBullet, transform.position + EnemyBulletPoint, Quaternion.identity);
-            yield return new WaitForSeconds(0.2f);
-        }
-        
-    }
+            Vector3 spawnPosition = EnemyBulletPoint.position;
+            GameObject bullet = Instantiate(EnemyBullet, spawnPosition, Quaternion.identity);
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            if (bulletRigidbody != null)
+            {
+                Vector3 direction = (targetPosition - spawnPosition).normalized;
+                bulletRigidbody.velocity = direction * bulletSpeed;
+            }
 
+            yield return new WaitForSeconds(burstInterval);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         if (collider2D.gameObject.tag == "Bullet1")
