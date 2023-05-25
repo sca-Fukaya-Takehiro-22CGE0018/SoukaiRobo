@@ -7,36 +7,36 @@ public class AutoStage : MonoBehaviour
     public GameObject Cube;
     public GameObject Aerial;
 
-    private float timer = 0;
-    private float spawntime = 2.0f;// 2秒ごとに生成
+    private float timer = 2.0f;
+    //private float spawntime = 2.0f;// 2秒ごとに生成
+    private float spawntime = 0.0f;
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
-    private int Height;
+    private int Height;//床の高さ
+    private int A_Height;//空中床の高さ
     private int high; // 1番高い
     private int low = -7; // 1番低い
     private int dif = 0; // 差
     private int groundMadeCount = 0;
-    private int AerialCount = 0; //空中床が連続で作られる数
-    private int A_GenerateCount = 0;//空中床が作られる確率の上限
+    private int aerialfloorMadeCount = 0;
     private int difCount = 0;
-    private bool isHallMade = false;
-    private bool isAerialFloorMade = false;
+    private bool isHallMade = false;//直前に穴が作られた
+    private bool makeAerialfloor = false;
     [SerializeField] private float y = 0.0f;
 
     void Start()
     {
         Height = low; //最初の高さ
         high = low + 3;
+        A_Height = low;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
+        timer -= Time.deltaTime;
 
-        if(timer > spawntime)
+        if(timer < spawntime)
         {
             StageGenerate();
-            AerialFloorGenerate();
-            timer = 0.0f;
         }
     }
 
@@ -45,23 +45,8 @@ public class AutoStage : MonoBehaviour
         //ランダム数（0～2）を作成
         int G_random = Random.Range(0, Max);
 
-        //直前に穴が作られているなら絶対すぐ作る
-        //if (isHallMade) return true;
-
-        //直前に空中床があったら必ず穴を生成
-        if(isAerialFloorMade) return false;
-
-        //空中床ができたら必ず穴を作る
-        if (isAerialFloorMade) return false;
-
-        //直前に穴があり空中床を生成
-        if(isHallMade)
-        if(G_random == 0)
-            {
-                AerialFloorGenerate();//空中床を作る
-                return false;
-            }
-        else return true;//空中床がない場合、必ず床を生成
+        //空中床が生成されなかったら必ず床を生成
+        if(isHallMade) return true;
 
         //1/3の確率で床は作られない
         if(G_random == 0) return false;
@@ -74,28 +59,6 @@ public class AutoStage : MonoBehaviour
         return true;
     }
 
-    bool CanAerialFloorGenerate()
-    {
-        //直前に穴があるか
-        if (!isHallMade) return false;
-
-        //直前に空中床があるか
-        if (isAerialFloorMade) return false;
-
-        //5回連続で生成されなかったら必ず生成する
-        if (A_GenerateCount >= 5) return true;
-
-        //連続で2回までしか作られない
-        if (AerialCount >= 2) return false;
-
-        //1/5で一つ作る
-        int A_random = Random.Range(0, 5);
-        if(A_random != 0) return false;
-
-
-        return true;
-    }
-
     void StageGenerate()
     {
         //生成しない
@@ -103,7 +66,31 @@ public class AutoStage : MonoBehaviour
         {
             isHallMade = true;//穴ができたことになる
             groundMadeCount = 0;//地面連続生成カウントを０に
-            isAerialFloorMade = false;
+
+            //空中床を生成するか
+            int A_random = Random.Range(0,2);
+
+            //4回連続で作られなかったら必ず空中床を生成
+            if (aerialfloorMadeCount >= 4)
+            {
+                Debug.Log("空中床を生成");
+                AerialFloorGenerate();
+                timer = 4.0f;
+                return;
+            }
+
+            //1/2の確立で空中床を生成する
+            if(A_random == 0)
+            {
+                Debug.Log("空中床を生成");
+                AerialFloorGenerate();
+                timer = 4.0f;
+                return;
+            }
+
+            //生成しないとき
+            timer = 2.0f;
+            ++aerialfloorMadeCount;
             return ;
         }
         
@@ -120,27 +107,24 @@ public class AutoStage : MonoBehaviour
             Height = high;
         }
         Instantiate(Cube,new Vector3(14, Height, 0),Quaternion.identity);
+        A_Height = Height;
 
         isHallMade = false;//地面ができた
         ++groundMadeCount;//一個作ったらカウントする
-        AerialCount = 0;
+
+        timer = 2.0f;
     }
 
     void AerialFloorGenerate()
     {
-        //生成しない
-        if (!CanAerialFloorGenerate())
-        {
-            isAerialFloorMade = false;
-            ++A_GenerateCount;
-            return;
-        }
+        Debug.Log(Height);
+        //空中床を生成する設定
 
-        //空中床のscale,座標の設定
-        Instantiate(Aerial,new Vector3(14,-2,0) , Quaternion.identity);
-        A_GenerateCount = 0;
-        ++AerialCount;
-        isAerialFloorMade = true;//空中床ができたことになる
+        //直前の床の高さより少し高い高さで生成
+        Instantiate(Aerial,new Vector3(16,A_Height+4,0) , Quaternion.identity);
 
+        //最後に穴ができるから
+        isHallMade = true;
+        aerialfloorMadeCount = 0;
     }
 }
