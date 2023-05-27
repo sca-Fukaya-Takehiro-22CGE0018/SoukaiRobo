@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerControll : MonoBehaviour
 {
-    //ダメージ1
     [SerializeField]
     private Rigidbody2D rb;// Player rb
+    [SerializeField]
+    private Collider2D jumpCollider;
     [SerializeField]
     float jumpForce;//Player ジャンプ力  
     [SerializeField]
@@ -15,8 +16,6 @@ public class PlayerControll : MonoBehaviour
     GameObject BulletPrefab1; //通常弾
     [SerializeField]
     GameObject BulletPrefab2; //強い弾 CTあり
-    [SerializeField]
-    float Hp = 0;
     public float Bullet1Power = 1;
     private bool jumpflag = false; //着地判定
     private bool isShoot = true; //CT用
@@ -26,12 +25,12 @@ public class PlayerControll : MonoBehaviour
 
     private EnemyControll  enemyControll;
     private TracEnemy tracEnemy;
+    private LifeManager lifeManager;
     // Start is called before the first frame update
     void Start()
     {
         BulletPoint = transform.Find("BulletPoint").localPosition;
-        this.enemyControll = FindObjectOfType<EnemyControll>();
-        this.tracEnemy = FindObjectOfType<TracEnemy>();
+        this.lifeManager = FindObjectOfType<LifeManager>();
     }
 
     // Update is called once per frame
@@ -75,19 +74,24 @@ public class PlayerControll : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider2D)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collider2D.gameObject.tag == "Stage")
+        if (collision.gameObject.tag == "Stage")
         {
             jumpflag = false;
         }
-        if (collider2D.gameObject.tag == "Enemy")
+    }
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if (collider2D.gameObject.tag == "EnemyBullet")
         {
-            Hp = Hp -= enemyControll.EnemyBulletPower;
+            lifeManager.HideHeart();
         }
-        if(collider2D.gameObject.tag == "tracEnemy")
+        if(collider2D.gameObject.tag == "TracEnemy")
         {
-
+            lifeManager.HideHeart();
         }
     }
+   
 }
