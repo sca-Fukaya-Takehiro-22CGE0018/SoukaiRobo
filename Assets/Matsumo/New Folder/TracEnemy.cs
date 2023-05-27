@@ -9,10 +9,12 @@ public class TracEnemy : MonoBehaviour
     private Vector3 PlayerPosition;
     private Vector3 EnemyPosition;
     private PlayerControll playerControll;
+    private PanelManager panelManager;
     // Start is called before the first frame update
     void Start()
     {
         this.playerControll = FindObjectOfType<PlayerControll>();
+        this.panelManager = FindObjectOfType<PanelManager>();
         playerObject = GameObject.FindWithTag("Player");
         PlayerPosition = playerObject.transform.position;
         EnemyPosition = transform.position;
@@ -21,12 +23,14 @@ public class TracEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerPosition = playerObject.transform.position;
-        EnemyPosition = transform.position;
-
-        EnemyPosition.x += (PlayerPosition.x - EnemyPosition.x) * 0.001f;
-        EnemyPosition.y += (PlayerPosition.y - EnemyPosition.y) * 0.001f;
-        transform.position = EnemyPosition;
+        if(panelManager.panelFlag == false)
+        {
+            PlayerPosition = playerObject.transform.position;
+            EnemyPosition = transform.position;
+            EnemyPosition.x += (PlayerPosition.x - EnemyPosition.x) * 0.001f;
+            EnemyPosition.y += (PlayerPosition.y - EnemyPosition.y) * 0.001f;
+            transform.position = EnemyPosition;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)

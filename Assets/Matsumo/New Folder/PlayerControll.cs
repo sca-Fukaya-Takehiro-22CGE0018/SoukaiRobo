@@ -26,11 +26,14 @@ public class PlayerControll : MonoBehaviour
     private EnemyControll  enemyControll;
     private TracEnemy tracEnemy;
     private LifeManager lifeManager;
+    private PanelManager panelManager;
     // Start is called before the first frame update
     void Start()
     {
         BulletPoint = transform.Find("BulletPoint").localPosition;
         this.lifeManager = FindObjectOfType<LifeManager>();
+        this.panelManager = FindObjectOfType<PanelManager>();
+        
     }
 
     // Update is called once per frame
@@ -42,7 +45,7 @@ public class PlayerControll : MonoBehaviour
             Jump();
         }
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * STEP, rb.velocity.y);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && panelManager.panelFlag == false)
         {
             Fire1();
         }

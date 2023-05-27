@@ -6,6 +6,14 @@ public class PanelManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject Panel;
+    bool Panelflag = false;
+
+
+    public bool panelFlag
+    {
+        get { return this.Panelflag;}
+        set { this.Panelflag = value;}
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +33,13 @@ public class PanelManager : MonoBehaviour
         {
             if (Panel.activeSelf)
             {
+                Panelflag = false;
                 Panel.SetActive(false);
                 Time.timeScale = 1.0f;
             }
             else
             {
+                Panelflag = true;
                 Panel.SetActive(true);
                 Time.timeScale = 0.0f;
             }
