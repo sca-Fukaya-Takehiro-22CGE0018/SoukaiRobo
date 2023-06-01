@@ -6,25 +6,32 @@ public class ItemMove : MonoBehaviour
 {
     private GameObject Enemy;
     private float speed = 2.0f;
+
     private Vector3 pos;
-    private float a = -2.0f;
+    private float a = -1.0f;
+    private float difX = 0.0f;
+    private float difY = 0.0f;
     private bool onStage = false;
     // Start is called before the first frame update
     void Start()
     {
-        pos = this.transform.position;
+        pos.x = this.transform.position.x+1.0f;
+        pos.y = this.transform.position.y;
+        difX = this.transform.position.x;//アイテムの最初のx座標
+        difY = this.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (onStage)
+        if (onStage)//地面に接しているとき
         {
             transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
             return;
         }
-        pos.x -= 0.004f;
-        pos.y = a * Mathf.Pow(pos.x+1.02f, 2) + 2.0f;
+
+        pos.x -= speed * Time.deltaTime;//x軸方向に進む速度
+        pos.y = a * Mathf.Pow(pos.x-difX, 2)+difY;
 
         transform.position = pos;
     }
