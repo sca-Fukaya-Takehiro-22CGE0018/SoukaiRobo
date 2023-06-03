@@ -1300,10 +1300,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 981642936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05919f104f0d084c88036ca78c63510, type: 3}
+  m_Script: {fileID: 11500000, guid: 5abfa584aad150b48974dd0da6af3ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeMinute: 0
+  CountDownMinutes: 0
+  timeText: {fileID: 0}
 --- !u!114 &981642939
 MonoBehaviour:
   m_ObjectHideFlags: 0
