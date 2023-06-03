@@ -5,96 +5,114 @@ using UnityEngine;
 public class PlayerControll : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody2D rb;// Player rb
+    private Rigidbody2D rb; // Player rb
     [SerializeField]
     private Collider2D jumpCollider;
     [SerializeField]
-    float jumpForce;//Player ジャンプ力  
+    private float jumpForce; // Player ジャンプ力  
     [SerializeField]
-    float STEP;// Player 移動速度
+    private float movementSpeed; // Player 移動速度
     [SerializeField]
-    GameObject BulletPrefab1; //通常弾
+    private float jumpTime; // ジャンプの長さ
     [SerializeField]
-    GameObject BulletPrefab2; //強い弾 CTあり
+    private float jumpDelay; // ジャンプの間隔
+    [SerializeField]
+    private GameObject bulletPrefab1; // 通常弾
+    [SerializeField]
+    private GameObject bulletPrefab2; // 強い弾 CTあり
     public float Bullet1Power = 1;
-    private bool jumpflag = false; //着地判定
-    private bool isShoot = true; //CT用
+
+    private bool isJumping = false; // ジャンプ中のフラグ
+    private bool isGrounded = false; // 地面に接地しているかのフラグ
+    private bool isShootingEnabled = true; // CT用
 
     private Vector2 velocity;
-    private Vector3 BulletPoint; //弾の発射地点
+    private Vector3 bulletPoint; // 弾の発射地点
 
-    private EnemyControll  enemyControll;
+    private EnemyControll enemyControll;
     private TracEnemy tracEnemy;
     private LifeManager lifeManager;
     private PanelManager panelManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        BulletPoint = transform.Find("BulletPoint").localPosition;
-        this.lifeManager = FindObjectOfType<LifeManager>();
-        this.panelManager = FindObjectOfType<PanelManager>();
-        
+        bulletPoint = transform.Find("BulletPoint").localPosition;
+        lifeManager = FindObjectOfType<LifeManager>();
+        panelManager = FindObjectOfType<PanelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position += new Vector3(STEP * Time.deltaTime, 0,0);
-        if(Input.GetKeyDown(KeyCode.Space) && !jumpflag && !(rb.velocity.y < -0.5f))
+        // ジャンプ処理
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && panelManager.panelFlag == false)
         {
-            Jump();
+            StartCoroutine(Jump());
         }
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * STEP, rb.velocity.y);
+
+        // 移動処理
+        float movementInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(movementInput * movementSpeed, rb.velocity.y);
+
+        // 弾発射処理
         if (Input.GetMouseButtonDown(0) && panelManager.panelFlag == false)
         {
             Fire1();
         }
-        if (Input.GetMouseButtonDown(1) && isShoot)
+        if (Input.GetMouseButtonDown(1) && isShootingEnabled)
         {
-            Instantiate(BulletPrefab2, transform.position + BulletPoint, Quaternion.identity);
-            StartCoroutine("FireBullet");
+            Instantiate(bulletPrefab2, transform.position + bulletPoint, Quaternion.identity);
+            StartCoroutine(EnableShooting());
         }
     }
 
-    IEnumerator FireBullet()
+    IEnumerator Jump()
     {
-        isShoot = false;
+        isJumping = true;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(jumpTime);
 
-        isShoot = true;
+        rb.AddForce(Vector2.down * (jumpForce*0.5f), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(jumpDelay);
+
+        isJumping = false;
     }
 
     void Fire1()
     {
-        Instantiate(BulletPrefab1, transform.position + BulletPoint, Quaternion.identity);
+        Instantiate(bulletPrefab1, transform.position + bulletPoint, Quaternion.identity);
     }
-    
 
-    void Jump()
+    IEnumerator EnableShooting()
     {
-        jumpflag = true;
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        isShootingEnabled = false;
+        yield return new WaitForSeconds(5.0f);
+        isShootingEnabled = true;
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Stage")
         {
-            jumpflag = false;
+            isGrounded = true;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Stage")
+        {
+            isGrounded = false;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.gameObject.tag == "EnemyBullet")
-        {
-            lifeManager.HideHeart();
-        }
-        if(collider2D.gameObject.tag == "TracEnemy")
+        if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
         {
             lifeManager.HideHeart();
         }
     }
-   
 }
