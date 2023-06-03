@@ -31,7 +31,7 @@ public class ItemMove : MonoBehaviour
         }
 
         pos.x -= speed * Time.deltaTime;//x軸方向に進む速度
-        pos.y = a * Mathf.Pow(pos.x-difX, 2)+difY;
+        pos.y = (a * Mathf.Pow(pos.x-difX, 2)+difY) * 2.5f;
 
         transform.position = pos;
     }
