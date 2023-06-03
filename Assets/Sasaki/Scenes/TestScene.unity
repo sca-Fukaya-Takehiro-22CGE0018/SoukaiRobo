@@ -826,6 +826,7 @@ MonoBehaviour:
   - {fileID: 1786458700}
   - {fileID: 1880428771}
   - {fileID: 1348123144}
+  Heart: {fileID: 1348123144}
 --- !u!4 &579625277
 Transform:
   m_ObjectHideFlags: 0
