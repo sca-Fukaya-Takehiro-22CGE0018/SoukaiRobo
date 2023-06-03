@@ -10,11 +10,13 @@ public class TracEnemy : MonoBehaviour
     private Vector3 EnemyPosition;
     private PlayerControll playerControll;
     private PanelManager panelManager;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.panelManager = FindObjectOfType<PanelManager>();
+        this.gameManager = FindObjectOfType<GameManager>();
         playerObject = GameObject.FindWithTag("Player");
         PlayerPosition = playerObject.transform.position;
         EnemyPosition = transform.position;
@@ -45,6 +47,7 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
+            gameManager.EnemyDefeat++;
             Destroy(this.gameObject);
         }
     }
