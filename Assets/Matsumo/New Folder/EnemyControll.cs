@@ -21,11 +21,13 @@ public class EnemyControll : MonoBehaviour
     public float hp = 0;
     public float EnemyBulletPower = 1;
     private PlayerControll playerControll;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         this.playerControll = FindObjectOfType<PlayerControll>();
+        this.gameManager = FindObjectOfType<GameManager>();
         InvokeRepeating("SpawnBulletBurst", delay, delay);
     }
 
@@ -69,6 +71,7 @@ public class EnemyControll : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(this.gameObject);
+            gameManager.EnemyDefeat++;
         }
     }
 }
