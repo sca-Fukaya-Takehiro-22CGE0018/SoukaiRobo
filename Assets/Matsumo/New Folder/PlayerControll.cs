@@ -9,25 +9,25 @@ public class PlayerControll : MonoBehaviour
     [SerializeField]
     private Collider2D jumpCollider;
     [SerializeField]
-    private float jumpForce; // Player ジャンプ力  
-    [SerializeField]
     private float movementSpeed; // Player 移動速度
     [SerializeField]
-    private float jumpTime; // ジャンプの長さ
+    private float jumpForce = 5f; // ジャンプ力
     [SerializeField]
-    private float jumpDelay; // ジャンプの間隔
+    private float jumpInterval = 0.5f; // ジャンプの間隔
     [SerializeField]
     private GameObject bulletPrefab1; // 通常弾
     [SerializeField]
     private GameObject bulletPrefab2; // 強い弾 CTあり
     public float Bullet1Power = 1;
 
-    private bool isJumping = false; // ジャンプ中のフラグ
+    private bool isJumping = true; // ジャンプ中のフラグ
+    private bool isFalling = false; // 下降中のフラグ
     private bool isGrounded = false; // 地面に接地しているかのフラグ
     private bool isShootingEnabled = true; // CT用
 
     private Vector2 velocity;
     private Vector3 bulletPoint; // 弾の発射地点
+    private float jumpTimer = 0f; // ジャンプタイマー
 
     private EnemyControll enemyControll;
     private TracEnemy tracEnemy;
@@ -45,12 +45,20 @@ public class PlayerControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ジャンプタイマーを更新
+        jumpTimer += Time.deltaTime;
+
         // ジャンプ処理
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && panelManager.panelFlag == false)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && isJumping && panelManager.panelFlag == false)
         {
-            StartCoroutine(Jump());
+            Jump();
         }
 
+        // ジャンプタイマーが指定の間隔を超えたらジャンプ可能にする
+        if (jumpTimer >= jumpInterval)
+        {
+            isJumping = true;
+        }
         // 移動処理
         float movementInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(movementInput * movementSpeed, rb.velocity.y);
@@ -67,17 +75,12 @@ public class PlayerControll : MonoBehaviour
         }
     }
 
-    IEnumerator Jump()
+    void Jump()
     {
         isJumping = true;
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(jumpTime);
-
-        rb.AddForce(Vector2.down * (jumpForce*0.5f), ForceMode2D.Impulse);
-        yield return new WaitForSeconds(jumpDelay);
-
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isJumping = false;
+        jumpTimer = 0f;
     }
 
     void Fire1()
@@ -97,6 +100,7 @@ public class PlayerControll : MonoBehaviour
         if (collision.gameObject.tag == "Stage")
         {
             isGrounded = true;
+            isFalling = false;
         }
     }
 
@@ -105,6 +109,7 @@ public class PlayerControll : MonoBehaviour
         if (collision.gameObject.tag == "Stage")
         {
             isGrounded = false;
+            isFalling = false;
         }
     }
 
