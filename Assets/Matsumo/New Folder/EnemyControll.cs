@@ -17,15 +17,18 @@ public class EnemyControll : MonoBehaviour
     [SerializeField]
     float burstInterval = 0.02f;
 
-    [SerializeField] Transform playerTransform;
+    private GameObject player;
     public float hp = 0;
     public float EnemyBulletPower = 1;
     private PlayerControll playerControll;
     private GameManager gameManager;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.gameManager = FindObjectOfType<GameManager>();
         InvokeRepeating("SpawnBulletBurst", delay, delay);
@@ -39,9 +42,9 @@ public class EnemyControll : MonoBehaviour
 
     private void SpawnBulletBurst()
     {
-        if (playerTransform != null)
+        if (player != null)
         {
-            Vector3 targetPosition = playerTransform.position;
+            Vector3 targetPosition = player.transform.position;
             StartCoroutine(SpawnBullets(targetPosition));
         }
     }

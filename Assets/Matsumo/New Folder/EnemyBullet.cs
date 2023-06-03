@@ -23,6 +23,14 @@ public class EnemyBullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if(collider2D.gameObject.tag == "Bullet1" || collider2D.gameObject.tag == "Bullet2")
+        {
+            Destroy(this.gameObject);
+            GameObject obj1 = GameObject.Find("Bullet1");
+            Destroy(obj1);
+            GameObject obj2 = GameObject.Find("Bullet2");
+            Destroy(obj2);
+        }
     }
 }
 
