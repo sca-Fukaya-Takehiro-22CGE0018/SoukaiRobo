@@ -25,6 +25,7 @@ public class LifeManager : MonoBehaviour
 
     public void CheckLife()
     {
+        //HP‚ª‚È‚­‚È‚Á‚½‚çƒŠƒUƒ‹ƒg‰æ–Ê‚ÉˆÚ“®
         if (!Heart.gameObject.activeSelf)
         {
             //SceneManager.LoadScene("ResultScene");

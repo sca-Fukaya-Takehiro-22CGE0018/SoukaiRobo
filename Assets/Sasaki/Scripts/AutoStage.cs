@@ -11,16 +11,25 @@ public class AutoStage : MonoBehaviour
     //private float spawntime = 2.0f;// 2秒ごとに生成
     private float spawntime = 0.0f;
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
+    private int GenerateLimit = 5;//ステージ連続生成の上限
     private int Height;//床の高さ
     private int A_Height;//空中床の高さ
     private int high; // 1番高い
     private int low = -7; // 1番低い
     private int dif = 0; // 差
     private int groundMadeCount = 0;
-    private int aerialfloorMadeCount = 0;
+    private int AerialfloorMadeCount = 0;
     private int difCount = 0;
     private bool isHallMade = false;//直前に穴が作られた
     private bool makeAerialfloor = false;
+    private bool isTankBossBattle = false;
+    private bool isWallBossBattle = false;
+
+    int DebugCount = 0;
+    int BossCount = 0;
+    bool DestroyTank = false;
+    bool DestroyWall = false;
+
     [SerializeField] private float y = 0.0f;
 
     void Start()
@@ -37,11 +46,34 @@ public class AutoStage : MonoBehaviour
         if(timer < spawntime)
         {
             StageGenerate();
+
+            if (DestroyTank)
+            {
+                return;
+            }
+            if (DestroyWall)
+            {
+                return;
+            }
+
+            //デバック用
+            DebugCount++;
+            if (DebugCount >= 5)
+            {
+                //Debug.Log("戦車出現");
+                //isTankBossBattle = true;
+                Debug.Log("壁出現");
+                isWallBossBattle = true;
+                GenerateLimit = 2;//ステージ連続生成上限
+            }
         }
     }
 
     bool CanGenerateStage()
     {
+        //ボス戦(戦車)だったらボス専用のステージを作る
+        if(isTankBossBattle) return true;
+
         //ランダム数（0～2）を作成
         int G_random = Random.Range(0, Max);
 
@@ -53,17 +85,40 @@ public class AutoStage : MonoBehaviour
         Debug.Log("ランダム数は通過");
 
         //連続で5回までしか床は作られない
-        if (groundMadeCount >= 5) return false;
+        if (groundMadeCount >= GenerateLimit) return false;
         Debug.Log("5回は作ってない");
 
         return true;
     }
+
 
     void StageGenerate()
     {
         //生成しない
         if (!CanGenerateStage())
         {
+            if (isWallBossBattle)
+            {
+                BossCount++;
+                if (BossCount >= 4)
+                {
+                    DestroyWall = true;
+                    Debug.Log("ボスがやられた");
+                    isWallBossBattle = false;
+                    GenerateLimit = 5;
+                }
+            }
+
+            //壁戦
+            if (isWallBossBattle)
+            {
+                //必ず空中床を2個生成
+                AerialFloorGenerate();
+                groundMadeCount = 0;
+                return;
+            }
+
+            //通常時・戦闘ヘリ
             isHallMade = true;//穴ができたことになる
             groundMadeCount = 0;//地面連続生成カウントを０に
 
@@ -71,7 +126,7 @@ public class AutoStage : MonoBehaviour
             int A_random = Random.Range(0,2);
 
             //4回連続で作られなかったら必ず空中床を生成
-            if (aerialfloorMadeCount >= 4)
+            if (AerialfloorMadeCount >= 4)
             {
                 Debug.Log("空中床を生成");
                 AerialFloorGenerate();
@@ -90,11 +145,31 @@ public class AutoStage : MonoBehaviour
 
             //生成しないとき
             timer = 2.0f;
-            ++aerialfloorMadeCount;
+            ++AerialfloorMadeCount;
             return ;
         }
+
+        //戦車戦
+        if (isTankBossBattle)
+        {
+            BossCount++;
+            Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);
+            timer = 2.0f;
+
+            //デバック用
+            if (BossCount >= 10)
+            {
+                Debug.Log("ボスがやられた");
+                isTankBossBattle = false;
+                DestroyTank = true;
+            }
+
+            return;
+        }
+
         
-        //生成
+        
+        //通常時・ヘリ戦　生成
         dif = Random.Range(-2, 3);
         Height = Height - dif;
         if (Height < low)
@@ -117,14 +192,25 @@ public class AutoStage : MonoBehaviour
 
     void AerialFloorGenerate()
     {
-        Debug.Log(Height);
-        //空中床を生成する設定
+        if (isWallBossBattle)
+        {
+            //壁戦専用
+            timer = 6.0f;
+            float Adif = Random.Range(-1.0f, 1.0f);
+            Instantiate(Aerial, new Vector3(16, A_Height + 4, 0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(20, A_Height + 4 + Adif), Quaternion.identity);
 
+            isHallMade = true;
+            AerialfloorMadeCount = 0;
+            return;
+        }
+
+        //通常時・戦闘ヘリ
         //直前の床の高さより少し高い高さで生成
         Instantiate(Aerial,new Vector3(16,A_Height+4,0) , Quaternion.identity);
 
         //最後に穴ができるから
         isHallMade = true;
-        aerialfloorMadeCount = 0;
+        AerialfloorMadeCount = 0;
     }
 }
