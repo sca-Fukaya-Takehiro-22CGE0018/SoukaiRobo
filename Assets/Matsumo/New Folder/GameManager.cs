@@ -15,15 +15,13 @@ public class GameManager : MonoBehaviour
     }
     public int EnemyDefeat
     {
-        set
-        {
-            defeat = value;
-
-            float progress = (float)defeat / maxEnemy;
-            slider.value = progress;
-        }
-
+        set{ defeat = value;}
         get { return defeat; }
+    }
+    public int MaxEnemy
+    {
+        set{maxEnemy = value;}
+        get { return maxEnemy;}
     }
     // Start is called before the first frame update
     void Start()

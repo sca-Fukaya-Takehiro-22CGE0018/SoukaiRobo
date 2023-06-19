@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TracEnemy : MonoBehaviour
 {
@@ -47,7 +48,6 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
-            gameManager.EnemyDefeat++;
             Destroy(this.gameObject);
         }
     }

@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class GaugeManager : MonoBehaviour
 {
-    [SerializeField]
-    Slider slider;
+    RectTransform rt;
     private GameManager gameManager;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        rt = GetComponent<RectTransform>();
         this.gameManager = FindObjectOfType<GameManager>();
-        slider.value = gameManager.EnemyDefeat;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float scaleX = gameManager.EnemyDefeat/(float)gameManager.MaxEnemy;
+        rt.localScale = new Vector2(scaleX,1);
     }
 }

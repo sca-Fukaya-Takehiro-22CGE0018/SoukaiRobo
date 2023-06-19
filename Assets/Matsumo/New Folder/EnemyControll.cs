@@ -11,7 +11,7 @@ public class EnemyControll : MonoBehaviour
     [SerializeField]
     float bulletSpeed;
     [SerializeField]
-    float delay;
+     float delay;
     [SerializeField]
     int burstCount = 3;
     [SerializeField]
@@ -22,6 +22,12 @@ public class EnemyControll : MonoBehaviour
     public float EnemyBulletPower = 1;
     private PlayerControll playerControll;
     private GameManager gameManager;
+
+    public float Delay
+    {
+        get { return this.delay;}
+        set { this.delay = value;}
+    }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -40,7 +46,7 @@ public class EnemyControll : MonoBehaviour
 
     }
 
-    private void SpawnBulletBurst()
+    public void SpawnBulletBurst()
     {
         if (player != null)
         {
@@ -49,7 +55,7 @@ public class EnemyControll : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnBullets(Vector3 targetPosition)
+    public IEnumerator SpawnBullets(Vector3 targetPosition)
     {
         for (int i = 0; i < burstCount; i++)
         {
@@ -74,7 +80,6 @@ public class EnemyControll : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(this.gameObject);
-            gameManager.EnemyDefeat++;
         }
     }
 }
