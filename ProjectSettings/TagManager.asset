@@ -10,6 +10,7 @@ TagManager:
   - Bullet2
   - EnemyBullet
   - TracEnemy
+  - Heart
   layers:
   - Default
   - TransparentFX

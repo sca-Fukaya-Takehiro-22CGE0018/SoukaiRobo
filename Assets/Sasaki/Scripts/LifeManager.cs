@@ -23,6 +23,22 @@ public class LifeManager : MonoBehaviour
         }
     }
 
+    public void HeartRecovery()
+    {
+        //ハートに触れたら回復
+        //リスト内のハートを逆順に表示
+        heartObjects.Reverse();
+        foreach(var heart in heartObjects)
+        {
+            if (!heart.activeSelf)
+            {
+                heart.SetActive(true);
+                break;
+            }
+        }
+        heartObjects.Reverse();
+    }
+
     public void CheckLife()
     {
         //HPがなくなったらリザルト画面に移動

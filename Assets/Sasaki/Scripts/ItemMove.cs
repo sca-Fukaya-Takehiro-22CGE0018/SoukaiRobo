@@ -42,5 +42,9 @@ public class ItemMove : MonoBehaviour
         {
             onStage = true;
         }
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

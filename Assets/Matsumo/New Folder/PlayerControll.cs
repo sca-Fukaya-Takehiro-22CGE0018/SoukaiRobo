@@ -102,6 +102,11 @@ public class PlayerControll : MonoBehaviour
             isGrounded = true;
             isFalling = false;
         }
+        if (collision.gameObject.tag == "Heart")
+        {
+            Debug.Log("êGÇÍÇΩ");
+            lifeManager.HeartRecovery();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
