@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Fukaya/Scenes/TitleScene.unity
     guid: de1ee27af7afb304599326f430ec7358
   - enabled: 1
-    path: Assets/Sasaki/Scenes/TestScene.unity
+    path: Assets/Scenes/GameScene.unity
     guid: 3f965a61f4a349b44b3836ce4f5fee43
   - enabled: 1
-    path: Assets/Sasaki/Scenes/ResultScene.unity
+    path: Assets/Scenes/ResultScene.unity
     guid: 49b0a6a97dc2f054395ebd7346a84589
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
