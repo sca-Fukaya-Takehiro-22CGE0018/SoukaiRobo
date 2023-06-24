@@ -1013,7 +1013,7 @@ MonoBehaviour:
   rb: {fileID: 867190121}
   jumpCollider: {fileID: 867190120}
   movementSpeed: 2
-  jumpForce: 5
+  jumpForce: 10
   jumpInterval: 0.5
   bulletPrefab1: {fileID: 5842687347022689170, guid: e929708059a163340a279402552a2064,
     type: 3}

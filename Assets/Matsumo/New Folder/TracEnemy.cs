@@ -12,6 +12,8 @@ public class TracEnemy : MonoBehaviour
     private PlayerControll playerControll;
     private PanelManager panelManager;
     private GameManager gameManager;
+
+    [SerializeField] private GameObject Heart;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,13 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
+            int random = Random.Range(0, 2);
+            if (random == 0)
+            {
+                Instantiate(Heart,
+                    new Vector3(this.transform.position.x - 0.5f, this.transform.position.y - 0.5f, this.transform.position.z),
+                    Quaternion.identity);
+            }
             Destroy(this.gameObject);
         }
     }

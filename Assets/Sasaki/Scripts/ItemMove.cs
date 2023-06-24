@@ -6,6 +6,7 @@ public class ItemMove : MonoBehaviour
 {
     private GameObject Enemy;
     private float speed = 2.0f;
+    private float onStageSpeed = 3.0f;
 
     private Vector3 pos;
     private float a = -1.0f;
@@ -26,7 +27,7 @@ public class ItemMove : MonoBehaviour
     {
         if (onStage)//地面に接しているとき
         {
-            transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
+            transform.position -= new Vector3(onStageSpeed * Time.deltaTime, 0, 0);
             return;
         }
 

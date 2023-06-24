@@ -47,11 +47,13 @@ public class AutoStage : MonoBehaviour
         {
             StageGenerate();
 
-            if (DestroyTank)
+            if (DebugCount >= 20)
             {
-                return;
+                isTankBossBattle = true;
+                Debug.Log("戦車出現");
+                isTankBossBattle = true;
             }
-            if (DestroyWall)
+            if (DestroyTank)
             {
                 return;
             }
@@ -65,6 +67,10 @@ public class AutoStage : MonoBehaviour
                 Debug.Log("壁出現");
                 isWallBossBattle = true;
                 GenerateLimit = 2;//ステージ連続生成上限
+            }
+            if (DestroyWall)
+            {
+                return;
             }
         }
     }
@@ -82,11 +88,9 @@ public class AutoStage : MonoBehaviour
 
         //1/3の確率で床は作られない
         if(G_random == 0) return false;
-        Debug.Log("ランダム数は通過");
 
         //連続で5回までしか床は作られない
         if (groundMadeCount >= GenerateLimit) return false;
-        Debug.Log("5回は作ってない");
 
         return true;
     }
@@ -106,6 +110,7 @@ public class AutoStage : MonoBehaviour
                     Debug.Log("ボスがやられた");
                     isWallBossBattle = false;
                     GenerateLimit = 5;
+                    BossCount = 0;
                 }
             }
 
@@ -157,9 +162,9 @@ public class AutoStage : MonoBehaviour
             timer = 2.0f;
 
             //デバック用
-            if (BossCount >= 10)
+            if (BossCount >= 5)
             {
-                Debug.Log("ボスがやられた");
+                Debug.Log("戦車がやられた");
                 isTankBossBattle = false;
                 DestroyTank = true;
             }

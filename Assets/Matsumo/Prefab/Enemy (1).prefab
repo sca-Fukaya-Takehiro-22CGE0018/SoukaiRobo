@@ -175,3 +175,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
+  Heart: {fileID: 8843565704305861461, guid: 85ab2498005f85242ac2194031bf2780, type: 3}
