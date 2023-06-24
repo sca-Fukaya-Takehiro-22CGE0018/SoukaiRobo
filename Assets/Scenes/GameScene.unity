@@ -1263,7 +1263,7 @@ MonoBehaviour:
   - {fileID: 8654061921185897723, guid: 5ff8ed9899fff2740899faaee4c4986c, type: 3}
   pos: {fileID: 1037385277}
   pos2: {fileID: 1037385277}
-  generateFrame: 350
+  generateFrame: 1000
 --- !u!4 &1037385277
 Transform:
   m_ObjectHideFlags: 0

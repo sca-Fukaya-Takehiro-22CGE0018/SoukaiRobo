@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfScreenAttack : EnemyControll
+public class OffScreenAttack : EnemyControll
 {
 
 }
