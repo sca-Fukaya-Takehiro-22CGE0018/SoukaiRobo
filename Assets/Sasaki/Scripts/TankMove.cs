@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TankMove : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject Missile;
+    [SerializeField]
+    private GameObject Player;
+
     private float speed;
     private bool onStage = false;
     // Start is called before the first frame update
@@ -24,5 +29,10 @@ public class TankMove : MonoBehaviour
         {
             speed = 0.0f;
         }
+    }
+
+    void MissileAttack()
+    {
+
     }
 }
