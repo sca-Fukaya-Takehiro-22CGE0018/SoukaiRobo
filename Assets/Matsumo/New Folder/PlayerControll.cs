@@ -28,6 +28,7 @@ public class PlayerControll : MonoBehaviour
     private Vector2 velocity;
     private Vector3 bulletPoint; // 弾の発射地点
     private float jumpTimer = 0f; // ジャンプタイマー
+    private float lifeTimer = 1.0f; //画面外の時の〇秒ごとにHPが減る
 
     private EnemyControll enemyControll;
     private TracEnemy tracEnemy;
@@ -72,6 +73,27 @@ public class PlayerControll : MonoBehaviour
         {
             Instantiate(bulletPrefab2, transform.position + bulletPoint, Quaternion.identity);
             StartCoroutine(EnableShooting());
+        }
+
+        //落下判定
+        if (transform.position.y <= -8.0f)
+        {
+            lifeManager.HideHeart();
+        }
+
+        //画面外判定
+        if (transform.position.x <= -8.0f)
+        {
+            lifeTimer -=  Time.deltaTime;
+            if (lifeTimer <= 0.0f)
+            {
+                lifeManager.HideHeart();
+                lifeTimer = 1.0f;
+            }
+        }
+        else
+        {
+            lifeTimer = 1.0f;
         }
     }
 

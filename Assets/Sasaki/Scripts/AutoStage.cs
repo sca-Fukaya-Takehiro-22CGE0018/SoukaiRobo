@@ -6,10 +6,12 @@ public class AutoStage : MonoBehaviour
 {
     public GameObject Cube;
     public GameObject Aerial;
+    public GameObject Tank;
 
     private float timer = 2.0f;
     //private float spawntime = 2.0f;// 2秒ごとに生成
     private float spawntime = 0.0f;
+    private float tankSpawnTime = 5.0f;
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
     private int GenerateLimit = 5;//ステージ連続生成の上限
     private int Height;//床の高さ
@@ -24,6 +26,8 @@ public class AutoStage : MonoBehaviour
     private bool makeAerialfloor = false;
     private bool isTankBossBattle = false;
     private bool isWallBossBattle = false;
+
+    private bool bossSpawn = true; //デバック用
 
     int DebugCount = 0;
     int BossCount = 0;
@@ -47,31 +51,32 @@ public class AutoStage : MonoBehaviour
         {
             StageGenerate();
 
-            if (DebugCount >= 20)
-            {
-                isTankBossBattle = true;
-                Debug.Log("戦車出現");
-                isTankBossBattle = true;
-            }
+            //デバック用
             if (DestroyTank)
             {
                 return;
             }
+            if (DebugCount >= 5)
+            {
+                isTankBossBattle = true;
+            }
+            //ここまで
 
             //デバック用
             DebugCount++;
-            if (DebugCount >= 5)
+            if (DebugCount >= 10)
             {
                 //Debug.Log("戦車出現");
                 //isTankBossBattle = true;
-                Debug.Log("壁出現");
-                isWallBossBattle = true;
-                GenerateLimit = 2;//ステージ連続生成上限
+                //Debug.Log("壁出現");
+                //isWallBossBattle = true;
+                //GenerateLimit = 2;//ステージ連続生成上限
             }
             if (DestroyWall)
             {
                 return;
             }
+            //ここまで
         }
     }
 
@@ -158,7 +163,7 @@ public class AutoStage : MonoBehaviour
         if (isTankBossBattle)
         {
             BossCount++;
-            Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);
+            Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
             timer = 2.0f;
 
             //デバック用
