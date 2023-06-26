@@ -126,11 +126,6 @@ public class PlayerControll : MonoBehaviour
             isGrounded = true;
             isFalling = false;
         }
-        if (collision.gameObject.tag == "Heart")
-        {
-            Debug.Log("êGÇÍÇΩ");
-            lifeManager.HeartRecovery();
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -149,6 +144,11 @@ public class PlayerControll : MonoBehaviour
         if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
         {
             lifeManager.HideHeart();
+        }
+        if(collider2D.gameObject.tag == "Heart")
+        {
+            Debug.Log("êGÇÍÇΩ");
+            lifeManager.HeartRecovery();
         }
     }
 }

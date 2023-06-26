@@ -147,10 +147,10 @@ MonoBehaviour:
   EnemyBullet: {fileID: 8215334948896572594, guid: 39fd17b190d27334bbdd0f1ec8d0837f,
     type: 3}
   EnemyBulletPoint: {fileID: 8654061921639913677}
-  bulletSpeed: 5
-  delay: 3
+  bulletSpeed: 10
+  delay: 1
   burstCount: 3
-  burstInterval: 0.5
+  burstInterval: 0.1
   hp: 3
   EnemyBulletPower: 1
 --- !u!1 &8654061921639913678

@@ -12,6 +12,7 @@ public class TracEnemy : MonoBehaviour
     private PlayerControll playerControll;
     private PanelManager panelManager;
     private GameManager gameManager;
+    private Animator anim = null;
 
     [SerializeField] private GameObject Heart;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class TracEnemy : MonoBehaviour
         playerObject = GameObject.FindWithTag("Player");
         PlayerPosition = playerObject.transform.position;
         EnemyPosition = transform.position;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
