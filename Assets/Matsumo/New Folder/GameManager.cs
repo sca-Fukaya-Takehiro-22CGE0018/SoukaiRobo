@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private int defeat = 0;
-    private int maxEnemy = 2;
+    private int defeat = 0;//撃破数
+    private int maxEnemy = 2;//最大撃破数
     [SerializeField]
     Slider slider;
     private void Awake()
@@ -15,13 +15,13 @@ public class GameManager : MonoBehaviour
     }
     public int EnemyDefeat
     {
-        set{ defeat = value;}
         get { return defeat; }
+        set { defeat = value;}
     }
     public int MaxEnemy
     {
-        set{maxEnemy = value;}
         get { return maxEnemy;}
+        set { maxEnemy = value; }
     }
     // Start is called before the first frame update
     void Start()

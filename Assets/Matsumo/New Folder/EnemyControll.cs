@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class EnemyControll : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField]//弾のプレハブ
     GameObject EnemyBullet;
-    [SerializeField]
+    [SerializeField]//射撃地点
     Transform EnemyBulletPoint;
-    [SerializeField]
+    [SerializeField]//弾のスピード
     float bulletSpeed;
-    [SerializeField]
+    [SerializeField]//射撃間隔
      float delay;
-    [SerializeField]
+    [SerializeField]//連射間隔
     int burstCount = 3;
-    [SerializeField]
+    [SerializeField]//連射の間隔
     float burstInterval = 0.02f;
 
     private GameObject player;
-    public float hp = 0;
-    public float EnemyBulletPower = 1;
+    public float hp = 0;//体力
+    public float EnemyBulletPower = 1;//ダメージ量
     private PlayerControll playerControll;
     private GameManager gameManager;
 
@@ -48,6 +48,7 @@ public class EnemyControll : MonoBehaviour
 
     public void SpawnBulletBurst()
     {
+        //pllayerの位置を探す
         if (player != null)
         {
             Vector3 targetPosition = player.transform.position;
@@ -57,6 +58,7 @@ public class EnemyControll : MonoBehaviour
 
     public IEnumerator SpawnBullets(Vector3 targetPosition)
     {
+        //射撃システム
         for (int i = 0; i < burstCount; i++)
         {
             Vector3 spawnPosition = EnemyBulletPoint.position;
@@ -67,18 +69,19 @@ public class EnemyControll : MonoBehaviour
                 Vector3 direction = (targetPosition - spawnPosition).normalized;
                 bulletRigidbody.velocity = direction * bulletSpeed;
             }
-
             yield return new WaitForSeconds(burstInterval);
         }
     }
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
+        //当たり判定
         if (collider2D.gameObject.tag == "Bullet1")
         {
             hp = hp -= playerControll.Bullet1Power;
         }
         if (hp <= 0)
         {
+            gameManager.EnemyDefeat += 1;
             Destroy(this.gameObject);
         }
     }

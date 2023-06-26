@@ -6,6 +6,7 @@ public class PanelManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject Panel;
+    //パネルフラグ
     bool Panelflag = false;
 
 
@@ -29,6 +30,7 @@ public class PanelManager : MonoBehaviour
 
     void Pause()
     {
+        //ESCが押されたらパネルの挙動
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Panel.activeSelf)

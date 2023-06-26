@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TracEnemy : MonoBehaviour
 {
-    public float hp = 0;
+    public float hp = 0;//体力
     private GameObject playerObject;
     private Vector3 PlayerPosition;
     private Vector3 EnemyPosition;
@@ -28,6 +28,7 @@ public class TracEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //フラグがfalseの時は動く
         if(panelManager.panelFlag == false)
         {
             PlayerPosition = playerObject.transform.position;
@@ -40,9 +41,11 @@ public class TracEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
+        //当たり判定
         if (collider2D.gameObject.tag == "Bullet1")
         {
             hp = hp -= playerControll.Bullet1Power;
+            gameManager.EnemyDefeat++;
         }
         if (collider2D.gameObject.tag == "Player")
         {
@@ -50,6 +53,7 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
+            //確率でアイテムドロップ
             int random = Random.Range(0, 2);
             if (random == 0)
             {

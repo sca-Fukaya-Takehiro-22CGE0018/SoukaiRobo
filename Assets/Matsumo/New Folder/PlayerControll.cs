@@ -112,6 +112,7 @@ public class PlayerControll : MonoBehaviour
 
     IEnumerator EnableShooting()
     {
+        //強い球の射撃インターバル
         isShootingEnabled = false;
         yield return new WaitForSeconds(5.0f);
         isShootingEnabled = true;
@@ -119,6 +120,7 @@ public class PlayerControll : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //ステージとの接触判定
         if (collision.gameObject.tag == "Stage")
         {
             isGrounded = true;
@@ -133,6 +135,7 @@ public class PlayerControll : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //衝突終了時
         if (collision.gameObject.tag == "Stage")
         {
             isGrounded = false;
@@ -142,6 +145,7 @@ public class PlayerControll : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
+        //当たり判定
         if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
         {
             lifeManager.HideHeart();
