@@ -573,6 +573,76 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &522971637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 522971639}
+  - component: {fileID: 522971638}
+  - component: {fileID: 522971640}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &522971638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522971637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7220ded03e51040959808592944757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &522971639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522971637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -5.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 867190118}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &522971640
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522971637}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.8531418, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &579625275
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +839,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 1181280823}
+  - {fileID: 522971639}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -785,15 +856,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 867190121}
-  jumpCollider: {fileID: 867190120}
-  movementSpeed: 2
-  jumpForce: 10
-  jumpInterval: 0.5
+  movementSpeed: 10
   bulletPrefab1: {fileID: 5842687347022689170, guid: e929708059a163340a279402552a2064,
     type: 3}
   bulletPrefab2: {fileID: 16600460151231187, guid: d8a4a2043f52cc941b1731461f29a26e,
     type: 3}
+  Bullet2Power: 3
   Bullet1Power: 1
+  ground: {fileID: 522971638}
+  gravity: 3
+  jumpSpeed: 10
+  jumpHeight: 5
+  jumpLimitTime: 0.5
+  dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.79831
+      outSlope: 2.79831
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.044168573
+    - serializedVersion: 3
+      time: 0.9815674
+      value: 0.9791069
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0016098022
+      value: 0.9984436
+      inSlope: -1.8353372
+      outSlope: -1.8353372
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07721338
+    - serializedVersion: 3
+      time: 0.2888417
+      value: 0.5122234
+      inSlope: -6.773913
+      outSlope: -6.773913
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10205661
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!70 &867190120
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -825,7 +947,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

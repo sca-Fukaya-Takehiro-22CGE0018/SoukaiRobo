@@ -79,6 +79,10 @@ public class EnemyControll : MonoBehaviour
         {
             hp = hp -= playerControll.Bullet1Power;
         }
+        if (collider2D.gameObject.tag == "Bullet2")
+        {
+            hp = hp -= playerControll.Bullet2Power;
+        }
         if (hp <= 0)
         {
             gameManager.EnemyDefeat += 1;

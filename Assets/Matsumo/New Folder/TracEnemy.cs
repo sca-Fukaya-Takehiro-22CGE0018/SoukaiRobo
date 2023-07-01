@@ -47,7 +47,11 @@ public class TracEnemy : MonoBehaviour
         if (collider2D.gameObject.tag == "Bullet1")
         {
             hp = hp -= playerControll.Bullet1Power;
-            gameManager.EnemyDefeat++;
+            
+        }
+        if(collider2D.gameObject.tag == "Bullet2")
+        {
+            hp = hp -= playerControll.Bullet2Power;
         }
         if (collider2D.gameObject.tag == "Player")
         {
@@ -55,6 +59,7 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
+            gameManager.EnemyDefeat++;
             //確率でアイテムドロップ
             int random = Random.Range(0, 2);
             if (random == 0)
