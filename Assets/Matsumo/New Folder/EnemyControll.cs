@@ -16,13 +16,15 @@ public class EnemyControll : MonoBehaviour
     int burstCount = 3;
     [SerializeField]//連射の間隔
     float burstInterval = 0.02f;
+    [SerializeField]//エフェクトプレハブ
+    GameObject Anim;
 
     private GameObject player;
     public float hp = 0;//体力
     public float EnemyBulletPower = 1;//ダメージ量
     private PlayerControll playerControll;
     private GameManager gameManager;
-
+    private Animator anim;
     public float Delay
     {
         get { return this.delay;}
@@ -32,6 +34,7 @@ public class EnemyControll : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
     }
     void Start()
     {
@@ -85,8 +88,10 @@ public class EnemyControll : MonoBehaviour
         }
         if (hp <= 0)
         {
+            Instantiate(Anim, transform.position, Quaternion.identity);
             gameManager.EnemyDefeat += 1;
             Destroy(this.gameObject);
+            
         }
     }
 }

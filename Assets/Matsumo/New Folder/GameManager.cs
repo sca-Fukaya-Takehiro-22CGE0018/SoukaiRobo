@@ -6,13 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     private int defeat = 0;//撃破数
     private int maxEnemy = 2;//最大撃破数
-    [SerializeField]
-    Slider slider;
+    private PanelManager panelManager;
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public int EnemyDefeat
     {
@@ -27,21 +35,35 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        panelManager = GetComponent<PanelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Load();
     }
 
-    public void LoadScene()
+    public void Load()
     {
-        if(maxEnemy == defeat)
+        if(defeat == maxEnemy)
         {
-            SceneManager.LoadScene("");
+            Debug.Log("aa");
+            defeat = 0;
+            SceneManager.LoadScene(2);
         }
+    }
+
+    public void ReLoad()
+    {
         defeat = 0;
+        Debug.Log("defeat 0");
+        SceneManager.LoadScene(1);
+    }
+
+    public void Title()
+    {
+        defeat = 0;
+        SceneManager.LoadScene(0);
     }
 }

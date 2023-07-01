@@ -9,7 +9,6 @@ public class PanelManager : MonoBehaviour
     //パネルフラグ
     bool Panelflag = false;
 
-
     public bool panelFlag
     {
         get { return this.Panelflag;}
