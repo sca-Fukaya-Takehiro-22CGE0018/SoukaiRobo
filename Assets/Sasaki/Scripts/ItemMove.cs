@@ -13,6 +13,8 @@ public class ItemMove : MonoBehaviour
     private float difX = 0.0f;
     private float difY = 0.0f;
     private bool onStage = false;
+
+    private LifeManager lifeManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class ItemMove : MonoBehaviour
         pos.y = this.transform.position.y;
         difX = this.transform.position.x;//アイテムの最初のx座標
         difY = this.transform.position.y;
+        lifeManager = FindObjectOfType<LifeManager>();
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class ItemMove : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+            lifeManager.HeartRecovery();
         }
     }
 }
