@@ -16,7 +16,7 @@ public class StageMove : MonoBehaviour
     void Update()
     {
         transform.position -= new Vector3(speed * Time.deltaTime,0,0);
-        if (this.transform.position.x <  -12)// 床を消す
+        if (this.transform.position.x <  -16)// 床を消す
         {
             Destroy(gameObject);
         }
