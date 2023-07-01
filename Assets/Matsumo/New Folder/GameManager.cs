@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int defeat = 0;//撃破数
     private int maxEnemy = 2;//最大撃破数
     private PanelManager panelManager;
+
     private void Awake()
     {
         if (instance == null)
@@ -25,11 +26,11 @@ public class GameManager : MonoBehaviour
     public int EnemyDefeat
     {
         get { return defeat; }
-        set { defeat = value;}
+        set { defeat = value; }
     }
     public int MaxEnemy
     {
-        get { return maxEnemy;}
+        get { return maxEnemy; }
         set { maxEnemy = value; }
     }
     // Start is called before the first frame update
@@ -41,29 +42,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Load();
     }
 
     public void Load()
     {
-        if(defeat == maxEnemy)
+        if (defeat == maxEnemy)
         {
+            Debug.Log(defeat);
             Debug.Log("aa");
             defeat = 0;
             SceneManager.LoadScene(2);
         }
-    }
-
-    public void ReLoad()
-    {
-        defeat = 0;
-        Debug.Log("defeat 0");
-        SceneManager.LoadScene(1);
-    }
-
-    public void Title()
-    {
-        defeat = 0;
-        SceneManager.LoadScene(0);
     }
 }
