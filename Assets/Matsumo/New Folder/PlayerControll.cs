@@ -141,7 +141,7 @@ public class PlayerControll : MonoBehaviour
         }
         rb.velocity = new Vector2(xSpeed, ySpeed);
         // ’e”­Ëˆ—
-        if (Input.GetMouseButtonDown(0) && panelManager.panelFlag == false)
+        if (Input.GetMouseButtonDown(0) /*&& panelManager.panelFlag == false*/)
         {
             Fire1();
         }
