@@ -38,7 +38,7 @@ public class BossMove : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {/* エラーが出ていたのでコメントアウトしてあります
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position,transform);
         // ヒットしたオブジェクトの処理
         if (hit.collider != null)
@@ -67,7 +67,7 @@ public class BossMove : MonoBehaviour
                 time = 0;
             }
             Debug.Log("下がる");
-        }
+        }*/
     }
 
     private void FixedUpdate()
