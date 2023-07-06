@@ -4,34 +4,37 @@ using UnityEngine;
 
 public class MissileMove : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
+    GameObject Player;
+    GameObject Missile;
+    private float speed = 2.0f;
 
-    private float speed = 3.0f;
-    private float dif;
+    Vector3 toDirection;
 
-    private Vector3 PlayerPosition;
-    private Vector3 MissilePosition;
+    private LifeManager lifeManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Missile = GameObject.FindGameObjectWithTag("Missile");
+        lifeManager = FindObjectOfType<LifeManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MissilePosition = transform.position;
-        MissilePosition.x -= speed*Time.deltaTime;
-        dif = PlayerPosition.y - MissilePosition.y;
-        if (dif >= 0)
+        //移動
+        this.transform.position = Vector2.MoveTowards(this.transform.position,new Vector2(Player.transform.position.x,Player.transform.position.y), speed * Time.deltaTime);
+
+        //向きの変更
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //当たり判定
+        if (other.gameObject.tag == "Player")
         {
-            MissilePosition.y += speed*Time.deltaTime;
+            lifeManager.HideHeart();
+            Destroy(this.gameObject);
         }
-        else
-        {
-            MissilePosition.y -= speed*Time.deltaTime;
-        }
-        transform.position = MissilePosition;
     }
 }
