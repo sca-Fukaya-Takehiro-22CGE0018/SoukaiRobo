@@ -46,7 +46,7 @@ public class EnemyControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.position -= new Vector3(2.0f,0,0)*Time.deltaTime;
     }
 
     public void SpawnBulletBurst()

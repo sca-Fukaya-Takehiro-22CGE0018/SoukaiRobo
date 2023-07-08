@@ -14,7 +14,7 @@ public class AutoStage : MonoBehaviour
     private float tankSpawnTime = 5.0f;
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
     private int GenerateLimit = 5;//ステージ連続生成の上限
-    private int Height;//床の高さ
+    public int Height;//床の高さ
     private int A_Height;//空中床の高さ
     private int high; // 1番高い
     private int low = -7; // 1番低い
@@ -27,7 +27,7 @@ public class AutoStage : MonoBehaviour
     private bool isTankBossBattle = false;
     private bool isWallBossBattle = false;
 
-    private bool bossSpawn = true; //デバック用
+    private bool bossSpawn = true;
 
     int DebugCount = 0;
     int BossCount = 0;
@@ -36,11 +36,17 @@ public class AutoStage : MonoBehaviour
 
     [SerializeField] private float y = 0.0f;
 
+    [SerializeField]
+    bool debug = false;
+
+    private EnemySpawn enemySpawn;
+
     void Start()
     {
         Height = low; //最初の高さ
         high = low + 3;
         A_Height = low;
+        enemySpawn = FindObjectOfType<EnemySpawn>();
     }
 
     void Update()
@@ -50,38 +56,14 @@ public class AutoStage : MonoBehaviour
         if(timer < spawntime)
         {
             StageGenerate();
-
-            //デバック用
-            if (DestroyTank)
-            {
-                return;
-            }
-            if (DebugCount >= 5)
-            {
-                isTankBossBattle = true;
-            }
-            //ここまで
-
-            //デバック用
-            DebugCount++;
-            if (DebugCount >= 10)
-            {
-                //Debug.Log("戦車出現");
-                //isTankBossBattle = true;
-                //Debug.Log("壁出現");
-                //isWallBossBattle = true;
-                //GenerateLimit = 2;//ステージ連続生成上限
-            }
-            if (DestroyWall)
-            {
-                return;
-            }
-            //ここまで
         }
     }
 
     bool CanGenerateStage()
     {
+        //debugのときはstageを平らにする
+        if (debug) return true;
+
         //ボス戦(戦車)だったらボス専用のステージを作る
         if(isTankBossBattle) return true;
 
@@ -160,26 +142,19 @@ public class AutoStage : MonoBehaviour
         }
 
         //戦車戦
-        if (isTankBossBattle)
+        if (isTankBossBattle || debug)
         {
             BossCount++;
             Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
+            enemySpawn.SpawnEnemy();
             timer = 2.0f;
-
-            //デバック用
-            if (BossCount >= 5)
-            {
-                Debug.Log("戦車がやられた");
-                isTankBossBattle = false;
-                DestroyTank = true;
-            }
-
             return;
         }
 
-        
-        
+
+
         //通常時・ヘリ戦　生成
+        timer = 2.0f;
         dif = Random.Range(-2, 3);
         Height = Height - dif;
         if (Height < low)
@@ -192,12 +167,11 @@ public class AutoStage : MonoBehaviour
             Height = high;
         }
         Instantiate(Cube,new Vector3(14, Height, 0),Quaternion.identity);
+        enemySpawn.SpawnEnemy();
         A_Height = Height;
 
         isHallMade = false;//地面ができた
         ++groundMadeCount;//一個作ったらカウントする
-
-        timer = 2.0f;
     }
 
     void AerialFloorGenerate()

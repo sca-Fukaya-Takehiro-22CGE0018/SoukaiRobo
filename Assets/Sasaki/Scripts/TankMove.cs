@@ -44,5 +44,6 @@ public class TankMove : MonoBehaviour
     void MissileAttack()
     {
         Debug.Log("ミサイル発射");
+        Instantiate(Missile,new Vector3(transform.position.x, transform.position.y+2.7f, transform.position.z),Quaternion.identity);
     }
 }

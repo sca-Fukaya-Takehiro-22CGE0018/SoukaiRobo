@@ -57,7 +57,6 @@ public class ItemMove : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
-            lifeManager.HeartRecovery();
         }
     }
 }
