@@ -619,7 +619,9 @@ MonoBehaviour:
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
   Tank: {fileID: 7425310924124389147, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
+  Height: 0
   y: 0
+  debug: 0
 --- !u!4 &518134535
 Transform:
   m_ObjectHideFlags: 0
@@ -1398,6 +1400,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348123144}
   m_CullTransparentMesh: 1
+--- !u!1 &1401942660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401942662}
+  - component: {fileID: 1401942661}
+  m_Layer: 0
+  m_Name: EnemySpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1401942661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401942660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9cf47c1f235ba428c123c3397057bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 8654061921185897723, guid: 5ff8ed9899fff2740899faaee4c4986c, type: 3}
+--- !u!4 &1401942662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401942660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.78308094, y: 0.42212665, z: -0.13130097}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1422528259
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        Instantiate(Enemy,new Vector3(15,autoStage.Height+5,0),Quaternion.identity);
+        Instantiate(Enemy,new Vector3(14,autoStage.Height+4.4f,0),Quaternion.identity);
         Debug.Log("敵出現");
     }
 }
