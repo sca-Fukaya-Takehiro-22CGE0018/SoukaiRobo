@@ -2418,6 +2418,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].time
+      value: -0.0011711121
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 0.20034072
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].value
+      value: 0.9984436
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 0.6028301
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].inSlope
+      value: 0.54635423
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outSlope
+      value: 0.54635423
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outWeight
+      value: 0.077732466
+      objectReference: {fileID: 0}
     - target: {fileID: 7264103743720671666, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
         type: 3}
       propertyPath: m_Name

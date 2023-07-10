@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         Load();
     }
 
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
             Debug.Log(defeat);
             Debug.Log("aa");
             defeat = 0;
-            //SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2);
         }
     }
 }

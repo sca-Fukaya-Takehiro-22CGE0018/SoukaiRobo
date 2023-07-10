@@ -8,9 +8,15 @@ public class BossMove : MonoBehaviour
     [Header("移動速度")]public float speed;
     [Header("重力")]public float gravity;
     [Header("体力")]public float hp;
+    [Header("射撃間隔")]public float delay;
+    [Header("レーザー")]public GameObject Bulletlaser;
+    [Header("レーザースピード")] public float laserSpeed;
+    [Header("レーザー間隔")]public float laserdelay;
+    [Header("レーザー射撃ポイント")]public Transform laserPoint;
     #endregion
 
     #region//プライベート変数
+    private GameObject player;
     private float backTime = 0.01f;
     private float time = 0;
     private Rigidbody2D rb = null;
@@ -28,29 +34,25 @@ public class BossMove : MonoBehaviour
         get { return this.hp;}
         set { this.hp = value;}
     }
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.headCollider = FindObjectOfType<Head>();
+        InvokeRepeating("Spawnlaser",delay,delay);
     }
 
     // Update is called once per frame
     void Update()
-    {/* エラーが出ていたのでコメントアウトしてあります
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position,transform);
+    {// エラーが出ていたのでコメントアウトしてあります
         // ヒットしたオブジェクトの処理
-        if (hit.collider != null)
-        {
-            // レイキャストが何かしらのオブジェクトにヒットした場合の処理
-            Debug.Log("Hit object: " + hit.collider.gameObject.name);
-        }
-        else
-        {
-            // レイキャストが何にもヒットしなかった場合の処理
-            Debug.Log("No hit");
-        }
         if (headCollider.HeadDamage == false)
         {
             Debug.Log("a");
@@ -67,13 +69,41 @@ public class BossMove : MonoBehaviour
                 time = 0;
             }
             Debug.Log("下がる");
-        }*/
+        }
+
+        
     }
 
     private void FixedUpdate()
     {
         
-       
+    }
+
+    public void Spawnlaser()
+    {
+        if(player != null)
+        {
+            Vector3 targetPosition = player.transform.position;
+            StartCoroutine(Attacklaser(targetPosition));
+        }
+    }
+
+    public IEnumerator Attacklaser(Vector3 targetPosition)
+    {
+        Vector3 spawnPosition = laserPoint.position;
+        GameObject bulletlaser = Instantiate(Bulletlaser,spawnPosition,Quaternion.identity);
+        Vector3 direction = (targetPosition - spawnPosition).normalized;
+
+        // 弾の向きを調整する
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        bulletlaser.transform.rotation = rotation;
+        Rigidbody2D bulletRigidbody = bulletlaser.GetComponent<Rigidbody2D>();
+        if (bulletRigidbody != null)
+        {
+            bulletRigidbody.velocity = direction * laserSpeed;
+        }
+        yield return new WaitForSeconds(laserdelay);
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)
