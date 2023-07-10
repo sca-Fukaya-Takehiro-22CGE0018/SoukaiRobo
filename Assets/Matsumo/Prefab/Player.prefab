@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7264103743125579041}
-  - component: {fileID: 7264103743125579040}
   - component: {fileID: 7264103743125579054}
+  - component: {fileID: 3699322855507492272}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -32,18 +32,6 @@ Transform:
   m_Father: {fileID: 7264103743720671664}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7264103743125579040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264103743125579043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7220ded03e51040959808592944757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &7264103743125579054
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -70,6 +58,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.8531418, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3699322855507492272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264103743125579043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7220ded03e51040959808592944757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7264103743720671666
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +121,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -197,7 +198,7 @@ MonoBehaviour:
     type: 3}
   Bullet2Power: 3
   Bullet1Power: 1
-  ground: {fileID: 7264103743125579040}
+  ground: {fileID: 0}
   gravity: 3
   jumpSpeed: 10
   jumpHeight: 5
