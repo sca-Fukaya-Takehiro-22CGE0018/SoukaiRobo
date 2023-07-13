@@ -52,8 +52,8 @@ public class MissileMove : MonoBehaviour
         //当たり判定
         if (other.gameObject.tag == "Player")
         {
-            lifeManager.HideHeart();
             Destroy(this.gameObject);
+            lifeManager.HideHeart();
         }
     }
 }

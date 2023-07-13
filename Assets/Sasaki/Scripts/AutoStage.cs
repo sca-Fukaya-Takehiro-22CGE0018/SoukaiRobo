@@ -146,7 +146,7 @@ public class AutoStage : MonoBehaviour
         {
             BossCount++;
             Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
-            enemySpawn.SpawnEnemy();
+            //enemySpawn.SpawnEnemy();//デバッグのためコメントアウト
             timer = 2.0f;
             return;
         }

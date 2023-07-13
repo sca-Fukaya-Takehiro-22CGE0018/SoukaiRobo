@@ -12,6 +12,7 @@ TagManager:
   - TracEnemy
   - Heart
   - Missile
+  - Cannonball
   layers:
   - Default
   - TransparentFX
