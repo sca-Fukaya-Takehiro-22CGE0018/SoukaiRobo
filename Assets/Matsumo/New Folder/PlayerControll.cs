@@ -24,8 +24,6 @@ public class PlayerControll : MonoBehaviour
     GroundCheck ground;//接触判定
     [SerializeField]
     float gravity;//重力
-    //gravity 3 → 4//////////
-
     [SerializeField]
     float jumpSpeed;//ジャンプする速度
     [SerializeField]
@@ -56,8 +54,7 @@ public class PlayerControll : MonoBehaviour
 
 
     //仮のジャンプ処理のための変数//////
-    [SerializeField]
-    private float jumpForce = 8000.0f;
+    private float jumpForce = 200.0f;
     private int jumpCount = 0;
     // Gravity Scaleを0→1に変更しています
     
@@ -88,7 +85,6 @@ public class PlayerControll : MonoBehaviour
         float xSpeed = 0.0f;
         float ySpeed = -gravity;
         float verticalKey = Input.GetAxis("Vertical");
-        /*
         if (isGround)
         {
             if (verticalKey > 0)
@@ -122,7 +118,7 @@ public class PlayerControll : MonoBehaviour
                 isJump = false;
                 jumpTime = 0.0f;
             }
-        }*/
+        }
         if (horizontalKey > 0)
         {
             transform.localScale = new Vector3(0.25f, 0.25f, 1);

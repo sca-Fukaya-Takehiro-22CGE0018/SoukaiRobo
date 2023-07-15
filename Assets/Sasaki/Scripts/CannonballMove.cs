@@ -38,20 +38,12 @@ public class CannonballMove : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (other.gameObject.tag == "Player")
+        if (collider2D.gameObject.tag == "Player")
         {
             lifeManager.HideHeart();
             Destroy(Cannonball);
-        }
-        if (other.gameObject.tag == "Bullet1")
-        {
-            Destroy(this.gameObject);
-        }
-        if (other.gameObject.tag == "Bullet2")
-        {
-            Destroy(this.gameObject);
         }
     }
 }

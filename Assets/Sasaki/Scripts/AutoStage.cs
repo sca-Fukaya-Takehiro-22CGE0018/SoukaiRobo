@@ -39,9 +39,6 @@ public class AutoStage : MonoBehaviour
     [SerializeField]
     bool debug = false;
 
-    [SerializeField]
-    private GameObject OSAtack;
-
     private EnemySpawn enemySpawn;
 
     void Start()
@@ -202,7 +199,6 @@ public class AutoStage : MonoBehaviour
 
     public void TankBattle()
     {
-        OSAtack.SetActive(false);
         isTankBossBattle = true;
         Invoke(nameof(TankSpawn),8.0f);
     }
