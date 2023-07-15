@@ -55,5 +55,13 @@ public class MissileMove : MonoBehaviour
             Destroy(this.gameObject);
             lifeManager.HideHeart();
         }
+        if (other.gameObject.tag == "Bullet1")
+        {
+            Destroy(this.gameObject);
+        }
+        if (other.gameObject.tag == "Bullet2")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
