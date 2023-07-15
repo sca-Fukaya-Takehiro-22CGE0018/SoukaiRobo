@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private PanelManager panelManager;
     private AutoStage autoStage;
 
+    //仮の変数//////////
+    private bool Tankbattle;
+
     private void Awake()
     {
         if (instance == null)
@@ -55,7 +58,14 @@ public class GameManager : MonoBehaviour
             Debug.Log("aa");
             defeat = 0;
             //SceneManager.LoadScene(2);
-            autoStage.TankBattle();
+
+            //仮の設定//////////
+            if (!Tankbattle)
+            {
+                autoStage.TankBattle();
+                Tankbattle = true;
+            }
+            ////
         }
     }
 }

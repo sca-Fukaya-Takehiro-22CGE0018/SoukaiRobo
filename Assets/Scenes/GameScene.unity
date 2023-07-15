@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &71735181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6746270116640897100, guid: 4341fa646ee773a4a81e40984fb4c0f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6746270117793827294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &97020843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -616,7 +622,8 @@ MonoBehaviour:
   Tank: {fileID: 6489802308476180291, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
   Height: 0
   y: 0
-  debug: 0
+  debug: 1
+  OSAtack: {fileID: 71735181}
 --- !u!4 &518134535
 Transform:
   m_ObjectHideFlags: 0
@@ -2419,6 +2426,16 @@ PrefabInstance:
       propertyPath: ground
       value: 
       objectReference: {fileID: 1736779485}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: gravity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671665, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: jumpForce
+      value: 8000
+      objectReference: {fileID: 0}
     - target: {fileID: 7264103743720671666, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
         type: 3}
       propertyPath: m_Name

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankMove : MonoBehaviour
 {
@@ -90,6 +91,7 @@ public class TankMove : MonoBehaviour
         if (Hp <= -0)
         {
             Destroy(this.gameObject);
+            SceneManager.LoadScene("ResultScene");
         }
     }
 }
