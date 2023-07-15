@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int defeat = 0;//撃破数
     private int maxEnemy = 2;//最大撃破数
     private PanelManager panelManager;
+    private AutoStage autoStage;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         panelManager = GetComponent<PanelManager>();
+        autoStage = FindObjectOfType<AutoStage>();
     }
 
     // Update is called once per frame
@@ -52,7 +54,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(defeat);
             Debug.Log("aa");
             defeat = 0;
-            SceneManager.LoadScene(2);
+            //SceneManager.LoadScene(2);
+            autoStage.TankBattle();
         }
     }
 }

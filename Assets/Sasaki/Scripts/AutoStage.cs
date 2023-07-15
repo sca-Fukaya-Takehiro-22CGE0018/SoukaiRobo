@@ -9,7 +9,7 @@ public class AutoStage : MonoBehaviour
     public GameObject Tank;
 
     private float timer = 2.0f;
-    //private float spawntime = 2.0f;// 2秒ごとに生成
+    private float BossSpawntimer = 0.0f;
     private float spawntime = 0.0f;
     private float tankSpawnTime = 5.0f;
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
@@ -144,7 +144,6 @@ public class AutoStage : MonoBehaviour
         //戦車戦
         if (isTankBossBattle || debug)
         {
-            BossCount++;
             Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
             //enemySpawn.SpawnEnemy();//デバッグのためコメントアウト
             timer = 2.0f;
@@ -196,5 +195,16 @@ public class AutoStage : MonoBehaviour
         //最後に穴ができるから
         isHallMade = true;
         AerialfloorMadeCount = 0;
+    }
+
+    public void TankBattle()
+    {
+        isTankBossBattle = true;
+        Invoke(nameof(TankSpawn),8.0f);
+    }
+
+    private void TankSpawn()
+    {
+        Instantiate(Tank, new Vector3(14, 0, 0), Quaternion.identity);
     }
 }

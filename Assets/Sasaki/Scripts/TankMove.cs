@@ -23,7 +23,7 @@ public class TankMove : MonoBehaviour
     void Start()
     {
         playerControll = FindObjectOfType<PlayerControll>();
-        speed = -3.0f;
+        speed = -2.0f;
         CannonballTimer = CannonCoolTime;
         MissileTimer = MissileCoolTime;
     }

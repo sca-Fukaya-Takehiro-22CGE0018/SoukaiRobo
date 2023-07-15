@@ -51,7 +51,14 @@ public class PlayerControll : MonoBehaviour
     private TracEnemy tracEnemy;
     private LifeManager lifeManager;
     private PanelManager panelManager;
+
+
+    //仮のジャンプ処理のための変数//////
+    private float jumpForce = 200.0f;
+    private int jumpCount = 0;
+    // Gravity Scaleを0→1に変更しています
     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +71,13 @@ public class PlayerControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //仮のジャンプ処理 Sasaki//////
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 1)
+        {
+            this.rb.AddForce(transform.up * jumpForce);
+            jumpCount++;
+        }
+
         //接地判定を得る
         isGround = ground.IsGround();
         // 移動処理
@@ -198,6 +212,15 @@ public class PlayerControll : MonoBehaviour
         {
             Debug.Log("触れた");
             lifeManager.HeartRecovery();
+        }
+    }
+
+    //仮のジャンプ処理のため追加//////
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Stage"))
+        {
+            jumpCount = 0;
         }
     }
 }

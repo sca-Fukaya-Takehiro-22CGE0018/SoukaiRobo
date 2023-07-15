@@ -44,7 +44,7 @@ public class LifeManager : MonoBehaviour
         //HP‚ª‚È‚­‚È‚Á‚½‚çƒŠƒUƒ‹ƒg‰æ–Ê‚ÉˆÚ“®
         if (!Heart.gameObject.activeSelf)
         {
-            SceneManager.LoadScene("ResultScene");
+            //SceneManager.LoadScene("ResultScene");
         }
     }
 }

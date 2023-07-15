@@ -613,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
-  Tank: {fileID: 7425310924124389147, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
+  Tank: {fileID: 6489802308476180291, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
   Height: 0
   y: 0
   debug: 0
@@ -2423,6 +2423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264103743720671679, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b7c1e9e052a6b141bfbc77b0f513dd3, type: 3}
