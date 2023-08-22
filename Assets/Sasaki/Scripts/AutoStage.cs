@@ -22,6 +22,7 @@ public class AutoStage : MonoBehaviour
     private int groundMadeCount = 0;
     private int AerialfloorMadeCount = 0;
     private int difCount = 0;
+    private int EnemyCount = 0;
     private bool isHallMade = false;//直前に穴が作られた
     private bool makeAerialfloor = false;
     private bool isTankBossBattle = false;
@@ -169,7 +170,13 @@ public class AutoStage : MonoBehaviour
             Height = high;
         }
         Instantiate(Cube,new Vector3(14, Height, 0),Quaternion.identity);
-        enemySpawn.SpawnEnemy();
+        //敵出現の調整
+        if (EnemyCount == 2)
+        {
+            enemySpawn.SpawnEnemy();
+            EnemyCount = 0;
+        }
+        ++EnemyCount;
         A_Height = Height;
 
         isHallMade = false;//地面ができた

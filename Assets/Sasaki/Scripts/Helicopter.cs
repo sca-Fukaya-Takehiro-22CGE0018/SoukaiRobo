@@ -55,13 +55,14 @@ public class Helicopter : MonoBehaviour
             VerticalMove = false;
             HorizontalMove = true;
             VerticalHeight = 8.0f;
-            height = 7.0f;
+            height = 8.5f;
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
         if (MoveCount == ChangeCount+1)
         {
-            VerticalHeight = 2.0f;
-            height = 1.0f;
+            //VerticalHeight = 2.0f;
+            VerticalHeight = 1.0f;
+            height = 2.0f;
         }
         if (MoveCount == AttackCount)
         {
@@ -74,7 +75,7 @@ public class Helicopter : MonoBehaviour
         if (MoveCount == MaxCount-1)
         {
             VerticalHeight = 8.0f;
-            height = 7.0f;
+            height = 9.0f;
         }
         if (MoveCount == MaxCount)
         {
