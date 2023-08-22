@@ -7,6 +7,8 @@ public class AutoStage : MonoBehaviour
     public GameObject Cube;
     public GameObject Aerial;
     public GameObject Tank;
+    public GameObject Wall;
+    public GameObject Helicopter;
 
     private float timer = 2.0f;
     private float BossSpawntimer = 0.0f;
@@ -25,12 +27,11 @@ public class AutoStage : MonoBehaviour
     private int EnemyCount = 0;
     private bool isHallMade = false;//直前に穴が作られた
     private bool makeAerialfloor = false;
+    private bool isNormalStage = true;
     private bool isTankBossBattle = false;
     private bool isWallBossBattle = false;
+    private bool isHelicopterBossBattle = false;
 
-    private bool bossSpawn = true;
-
-    int DebugCount = 0;
     int BossCount = 0;
     bool DestroyTank = false;
     bool DestroyWall = false;
@@ -92,6 +93,7 @@ public class AutoStage : MonoBehaviour
         //生成しない
         if (!CanGenerateStage())
         {
+            //壁戦のとき(デバッグ用)
             if (isWallBossBattle)
             {
                 BossCount++;
@@ -105,7 +107,7 @@ public class AutoStage : MonoBehaviour
                 }
             }
 
-            //壁戦
+            //壁戦のとき
             if (isWallBossBattle)
             {
                 //必ず空中床を2個生成
@@ -114,9 +116,12 @@ public class AutoStage : MonoBehaviour
                 return;
             }
 
-            //通常時・戦闘ヘリ
-            isHallMade = true;//穴ができたことになる
-            groundMadeCount = 0;//地面連続生成カウントを０に
+            //通常時・戦闘ヘリのとき
+            if (isNormalStage || isHelicopterBossBattle)
+            {
+                isHallMade = true;//穴ができたことになる
+                groundMadeCount = 0;//地面連続生成カウントを０に
+            }
 
             //空中床を生成するか
             int A_random = Random.Range(0,2);
@@ -139,37 +144,44 @@ public class AutoStage : MonoBehaviour
                 return;
             }
 
-            //生成しないとき
             timer = 2.0f;
             ++AerialfloorMadeCount;
             return ;
         }
 
-        //戦車戦
+        //生成する
+        //戦車戦のとき
         if (isTankBossBattle || debug)
         {
             Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
-            //enemySpawn.SpawnEnemy();//デバッグのためコメントアウト
             timer = 2.0f;
             return;
         }
 
-
-
-        //通常時・ヘリ戦　生成
-        timer = 2.0f;
-        dif = Random.Range(-2, 3);
-        Height = Height - dif;
-        if (Height < low)
+        //壁戦のとき
+        if (isWallBossBattle)
         {
-            Height = low;
-            difCount++;
+            //AerialFloorGenerate()で処理
         }
-        if (Height > high)
+
+        //通常時・ヘリ戦のとき
+        if (isNormalStage || isHelicopterBossBattle)
         {
-            Height = high;
+            timer = 2.0f;
+            dif = Random.Range(-2, 3);
+            Height = Height - dif;
+            if (Height < low)//ステージの高さが最低より低くなる時
+            {
+                Height = low;
+                difCount++;
+            }
+            if (Height > high)//ステージの高さが最大より高くなる時
+            {
+                Height = high;
+            }
+            Instantiate(Cube, new Vector3(14, Height, 0), Quaternion.identity);
         }
-        Instantiate(Cube,new Vector3(14, Height, 0),Quaternion.identity);
+
         //敵出現の調整
         if (EnemyCount == 2)
         {
@@ -177,14 +189,21 @@ public class AutoStage : MonoBehaviour
             EnemyCount = 0;
         }
         ++EnemyCount;
-        A_Height = Height;
 
+        A_Height = Height;
         isHallMade = false;//地面ができた
         ++groundMadeCount;//一個作ったらカウントする
     }
 
-    void AerialFloorGenerate()
+    void AerialFloorGenerate() //空中床の生成
     {
+        //戦車戦のとき
+        if (isTankBossBattle)
+        {
+            //落とし穴、空中床は生成されない
+        }
+
+        //壁戦のとき
         if (isWallBossBattle)
         {
             //壁戦専用
@@ -198,15 +217,31 @@ public class AutoStage : MonoBehaviour
             return;
         }
 
-        //通常時・戦闘ヘリ
-        //直前の床の高さより少し高い高さで生成
-        Instantiate(Aerial,new Vector3(16,A_Height+4,0) , Quaternion.identity);
+        //通常時・戦闘ヘリのとき
+        if (isNormalStage || isHelicopterBossBattle)
+        {
+            //直前の床の高さより少し高い高さで生成
+            Instantiate(Aerial, new Vector3(16, A_Height + 4, 0), Quaternion.identity);
+        }
 
         //最後に穴ができるから
         isHallMade = true;
         AerialfloorMadeCount = 0;
     }
 
+    //通常時
+    public void NormalStage()
+    {
+        //bossを倒したら
+        //Boss戦のboolをすべてfalse
+        //isNormalStageをtrueに戻す
+        isTankBossBattle = false;
+        isWallBossBattle = false;
+        isHelicopterBossBattle = false;
+        isNormalStage = true;
+    }
+
+    //戦車戦
     public void TankBattle()
     {
         OSAttack.SetActive(false);
@@ -214,8 +249,37 @@ public class AutoStage : MonoBehaviour
         Invoke(nameof(TankSpawn),8.0f);
     }
 
+    //戦車出現
     private void TankSpawn()
     {
         Instantiate(Tank, new Vector3(14, 0, 0), Quaternion.identity);
+    }
+
+    //壁戦
+    public void WallBattle()
+    {
+        OSAttack.SetActive(false);
+        isWallBossBattle = true;
+        Invoke(nameof(WallSpawn),8.0f);
+    }
+
+    //壁出現
+    private void WallSpawn()
+    {
+        Instantiate(Wall, new Vector3(14,0,0),Quaternion.identity);
+    }
+
+    //ヘリ戦
+    public void HelicopterBattle()
+    {
+        OSAttack.SetActive(false);
+        isHelicopterBossBattle = true;
+        Invoke(nameof(HelicopterSpawn),8.0f);
+    }
+
+    //ヘリ出現
+    private void HelicopterSpawn()
+    {
+        Instantiate(Helicopter, new Vector3(14,3.5f,0),Quaternion.identity);
     }
 }

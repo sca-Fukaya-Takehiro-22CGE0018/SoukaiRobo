@@ -498,6 +498,7 @@ MonoBehaviour:
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
   Tank: {fileID: 0}
+  Helicopter: {fileID: 0}
   Height: 0
   y: 0
   debug: 1
