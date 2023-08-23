@@ -13,6 +13,7 @@ public class BossMove : MonoBehaviour
     [Header("レーザースピード")] public float laserSpeed;
     [Header("レーザー間隔")]public float laserdelay;
     [Header("レーザー射撃ポイント")]public Transform laserPoint;
+    [Header("爆破エフェクト")]public GameObject Anim;
     #endregion
 
     #region//プライベート変数
@@ -22,6 +23,7 @@ public class BossMove : MonoBehaviour
     private Rigidbody2D rb = null;
     private bool rightTleftF = false;
     private bool HitDamage = false;
+    private Animator anim;
     #endregion
 
     #region//スクリプト参照
@@ -38,6 +40,7 @@ public class BossMove : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -70,8 +73,6 @@ public class BossMove : MonoBehaviour
             }
             Debug.Log("下がる");
         }
-
-        
     }
 
     private void FixedUpdate()
@@ -111,6 +112,11 @@ public class BossMove : MonoBehaviour
         if(collider2D.gameObject.tag == "Bullet1")
         {
             hp = hp - playerControll.Bullet1Power;
+        }
+        if (hp <= 0)
+        {
+            Instantiate(Anim, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }

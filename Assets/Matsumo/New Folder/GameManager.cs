@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private int defeat = 0;//撃破数
-    private int maxEnemy = 2;//最大撃破数
+    [SerializeField] int defeat = 0;//撃破数
+    [SerializeField] int maxEnemy = 2;//最大撃破数
+    [SerializeField] Image image = null;
+    [SerializeField] GameObject panel = null;
     private PanelManager panelManager;
     private AutoStage autoStage;
 
