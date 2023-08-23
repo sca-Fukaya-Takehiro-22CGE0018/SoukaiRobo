@@ -60,13 +60,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("aa");
             defeat = 0;
             //SceneManager.LoadScene(2);
-
-            //仮の設定//////
-            if (!TankBattle)
-            {
-                autoStage.TankBattle();
-                TankBattle = true;
-            }
         }
     }
 }

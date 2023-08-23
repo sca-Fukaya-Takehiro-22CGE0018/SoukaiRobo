@@ -91,7 +91,6 @@ public class TankMove : MonoBehaviour
         if (Hp <= -0)
         {
             Destroy(this.gameObject);
-            SceneManager.LoadScene("ResultScene");
         }
     }
 }

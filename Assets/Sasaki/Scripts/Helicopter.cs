@@ -6,12 +6,13 @@ public class Helicopter : MonoBehaviour
 {
     //移動関係
     private float cos;
-    private float HorizontalWidth = 14.0f;//横移動の幅
+    private float HorizontalWidth = 16.0f;//横移動の幅
     private float HorizontalHeight = 3.5f;//横移動の時の高さ
     private float VerticalWidth = 6.0f;//垂直移動のX座標
     private float VerticalHeight = 2.0f;//垂直移動の高さ(幅)
     private float height = 1.0f;//垂直移動の高さ調整
     private float speed = 2.0f;//移動速度
+    private float Hp = 100;//ヘリのHP
     private int MoveCount = 0;
     private int ChangeCount = 4;//移動の向き変更
     private int MaxCount = 10;
@@ -35,12 +36,14 @@ public class Helicopter : MonoBehaviour
     private int AttackCount = 6;
     private bool AttackCheck = true;
 
+    private PlayerControll playerControll;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         VerticalMove = true;
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
+        playerControll = FindObjectOfType<PlayerControll>();
     }
 
     // Update is called once per frame
@@ -48,6 +51,11 @@ public class Helicopter : MonoBehaviour
     {
         cos = Mathf.Cos(Time.time * speed);
 
+        //HPが0になったらplayerに突撃
+        if (Hp <= 0.0f)
+        {
+            return;
+        }
 
         //Countでヘリコプターの移動を変えている
         if (MoveCount == ChangeCount)
@@ -126,7 +134,7 @@ public class Helicopter : MonoBehaviour
 
 
         //回転
-        if (transform.position.x <= -13.0f || transform.position.x >= 13.0f)
+        if (transform.position.x <= -(HorizontalWidth-1.0f) || transform.position.x >= (HorizontalWidth-1.0f))
         {
             if (lotateCheck)
             {
@@ -170,6 +178,22 @@ public class Helicopter : MonoBehaviour
                 BulletRigidbody.velocity = dir * BulletSpeed;
             }
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if (collider2D.gameObject.tag == "Bullet1")
+        {
+            Hp = Hp -= playerControll.Bullet1Power;
+        }
+        if (collider2D.gameObject.tag == "Bullet2")
+        {
+            Hp = Hp -= playerControll.Bullet2Power;
+        }
+        if (Hp <= -0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

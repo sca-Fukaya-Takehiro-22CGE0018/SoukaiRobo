@@ -252,7 +252,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(14, 0, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(16, 0, 0), Quaternion.identity);
     }
 
     //壁戦
@@ -266,7 +266,7 @@ public class AutoStage : MonoBehaviour
     //壁出現
     private void WallSpawn()
     {
-        Instantiate(Wall, new Vector3(14,0,0),Quaternion.identity);
+        Instantiate(Wall, new Vector3(16,0,0),Quaternion.identity);
     }
 
     //ヘリ戦
@@ -280,6 +280,6 @@ public class AutoStage : MonoBehaviour
     //ヘリ出現
     private void HelicopterSpawn()
     {
-        Instantiate(Helicopter, new Vector3(14,3.5f,0),Quaternion.identity);
+        Instantiate(Helicopter, new Vector3(16,3.5f,0),Quaternion.identity);
     }
 }
