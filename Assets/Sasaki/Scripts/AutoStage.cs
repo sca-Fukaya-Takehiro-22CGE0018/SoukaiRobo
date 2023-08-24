@@ -18,6 +18,7 @@ public class AutoStage : MonoBehaviour
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
     private int GenerateLimit = 5;//ステージ連続生成の上限
     public float Height;//床の高さ
+    private float beforeHeight;//直前の床の高さ
     private float A_Height;//空中床の高さ
     private float high; // 1番高い
     private float low; // 1番低い
@@ -183,6 +184,7 @@ public class AutoStage : MonoBehaviour
         {
             timer = 2.0f;
             dif = Random.Range(-2, 3);
+            beforeHeight = Height;
             Height = Height - dif;
             if (Height < low)//ステージの高さが最低より低くなる時
             {
@@ -199,7 +201,7 @@ public class AutoStage : MonoBehaviour
         //敵出現の調整
         if (EnemyCount == 2)
         {
-            if (dif >= 0.0f)
+            if (beforeHeight <= Height)
             {
                 enemySpawn.SpawnEnemy();
                 EnemyCount = 0;

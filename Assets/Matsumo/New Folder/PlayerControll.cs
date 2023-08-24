@@ -210,10 +210,10 @@ public class PlayerControll : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         //ìñÇΩÇËîªíË
-        if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
+        /*if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
         {
             lifeManager.HideHeart();
-        }
+        }*/
         //if(collider2D.gameObject.tag == "Heart")
         //{
         //    Debug.Log("êGÇÍÇΩ");
