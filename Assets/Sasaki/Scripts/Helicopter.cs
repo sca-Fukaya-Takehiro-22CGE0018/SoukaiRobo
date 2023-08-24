@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Helicopter : MonoBehaviour
 {
@@ -196,6 +197,7 @@ public class Helicopter : MonoBehaviour
         if (Hp <= -0)
         {
             Destroy(this.gameObject);
+            SceneManager.LoadScene("ResultScene");
         }
     }
 }

@@ -148,6 +148,11 @@ PrefabInstance:
       propertyPath: GaugeManager
       value: 
       objectReference: {fileID: 1422528259}
+    - target: {fileID: 5093437476398057344, guid: 3d2976b1d7817e745ab6ea0d7d5c2661,
+        type: 3}
+      propertyPath: maxEnemy
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5093437476398057345, guid: 3d2976b1d7817e745ab6ea0d7d5c2661,
         type: 3}
       propertyPath: m_Name
@@ -711,12 +716,15 @@ MonoBehaviour:
   Wall: {fileID: 0}
   Helicopter: {fileID: 5941369292243183035, guid: 7bf566942b6bf7949b3afe9eb80c647f,
     type: 3}
+  SpawnPositionX: 0
   Height: 0
   y: 0
   EnemySpawn: {fileID: 1037385275}
   debug: 0
   OSAttack: {fileID: 2112780576}
   GaugeManager: {fileID: 1422528259}
+  rightTop: {x: 0, y: 0, z: 0}
+  leftBottom: {x: 0, y: 0, z: 0}
 --- !u!4 &518134535
 Transform:
   m_ObjectHideFlags: 0
@@ -2341,7 +2349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015031009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: -8.8, z: 0}
+  m_LocalPosition: {x: 11, y: -8.8, z: 0}
   m_LocalScale: {x: 5, y: 3.1, z: 1}
   m_Children: []
   m_Father: {fileID: 518134535}
@@ -2463,7 +2471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8781136584287753175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -8.8, z: 0}
+  m_LocalPosition: {x: -3, y: -8.8, z: 0}
   m_LocalScale: {x: 5, y: 3.1, z: 1}
   m_Children: []
   m_Father: {fileID: 518134535}

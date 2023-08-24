@@ -223,8 +223,8 @@ public class AutoStage : MonoBehaviour
             //壁戦専用
             timer = 6.0f;
             float Adif = Random.Range(-1.0f, 1.0f);
-            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, A_Height + 4, 0), Quaternion.identity);
-            Instantiate(Aerial, new Vector3(SpawnPositionX+6.0f, A_Height + 4 + Adif,0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, leftBottom.y+2.0f, 0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+6.0f, leftBottom.y+2.0f + Adif,0), Quaternion.identity);
 
             isHallMade = true;
             AerialfloorMadeCount = 0;
@@ -235,7 +235,7 @@ public class AutoStage : MonoBehaviour
         if (isNormalStage || isHelicopterBossBattle)
         {
             //直前の床の高さより少し高い高さで生成
-            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, A_Height + 4, 0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, leftBottom.y+2.0f, 0), Quaternion.identity);
         }
 
         //最後に穴ができるから

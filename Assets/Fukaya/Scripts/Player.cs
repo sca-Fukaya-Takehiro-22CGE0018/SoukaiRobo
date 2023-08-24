@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     private TracEnemy tracEnemy;
     private LifeManager lifeManager;
     private PanelManager panelManager;
+    private AutoStage autoStage;
 
 
     //仮のジャンプ処理のための変数//////
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
         bulletPoint = transform.Find("BulletPoint").localPosition;
         lifeManager = FindObjectOfType<LifeManager>();
         panelManager = FindObjectOfType<PanelManager>();
+        autoStage = FindObjectOfType<AutoStage>();
         rb = GetComponent<Rigidbody2D>();
 
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -143,16 +145,25 @@ public class Player : MonoBehaviour
         }
 
         //落下判定
-        if (transform.position.y <= -8.0f)
+        if (this.transform.position.y <= autoStage.leftBottom.y-3.0f)
         {
             lifeManager.HideHeart();
         }
 
+        //画面外判定
+        if (this.transform.position.x <= autoStage.leftBottom.x-0.6f)
+        {
+            lifeTimer -= Time.deltaTime;
+            if (lifeTimer <= 0.0f)
+            {
+                lifeManager.HideHeart();
+                lifeTimer = 1.0f;
+            }
+        }
         else
         {
             lifeTimer = 1.0f;
         }
-
     }
 
     void Fire1()
