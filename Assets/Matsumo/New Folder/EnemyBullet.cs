@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     private GameObject playerObject;
+    private LifeManager lifeManager;
     // Start is called before the first frame update
     void Start()
     {
         playerObject = GameObject.FindWithTag("Player");
+        lifeManager = FindObjectOfType<LifeManager>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class EnemyBullet : MonoBehaviour
         {
             //playerに当たったら消える
             Destroy(this.gameObject);
+            lifeManager.HideHeart();
         }
         if(collider2D.gameObject.tag == "Bullet1" || collider2D.gameObject.tag == "Bullet2")
         {

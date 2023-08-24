@@ -52,6 +52,7 @@ public class Helicopter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Hp);
         cos = Mathf.Cos(Time.time * speed);
 
         //HP‚ª0‚É‚È‚Á‚½‚çplayer‚É“ËŒ‚
