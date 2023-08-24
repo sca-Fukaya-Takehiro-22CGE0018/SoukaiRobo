@@ -9,8 +9,8 @@ public class EnemyRandom : MonoBehaviour
     [SerializeField] Transform pos2;                // 生成位置
     float minX, maxX, minY, maxY;                   // 生成範囲
 
-    int frame = 0;
-    [SerializeField] int generateFrame = 30;        // 生成する間隔
+    float spawn = 0;
+    [SerializeField] int generate = 8;        // 生成する間隔
 
     private AutoStage autoStage;
 
@@ -25,11 +25,11 @@ public class EnemyRandom : MonoBehaviour
 
     void Update()
     {
-        ++frame;
+        spawn += Time.deltaTime;
 
-        if (frame > generateFrame)
+        if (spawn > generate)
         {
-            frame = 0;
+            spawn = 0;
 
             // ランダムで種類と位置を決める
             int index = Random.Range(0, enemyList.Count);

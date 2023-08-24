@@ -35,8 +35,8 @@ public class TracEnemy : MonoBehaviour
         {
             PlayerPosition = playerObject.transform.position;
             EnemyPosition = transform.position;
-            EnemyPosition.x += (PlayerPosition.x - EnemyPosition.x) * 0.001f;
-            EnemyPosition.y += (PlayerPosition.y - EnemyPosition.y) * 0.001f;
+            EnemyPosition.x += (PlayerPosition.x - EnemyPosition.x) * 0.5f * Time.deltaTime;
+            EnemyPosition.y += (PlayerPosition.y - EnemyPosition.y) * 0.5f * Time.deltaTime;
             transform.position = EnemyPosition;
         }
     }
