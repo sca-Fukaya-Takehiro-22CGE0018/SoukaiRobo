@@ -14,12 +14,13 @@ public class AutoStage : MonoBehaviour
     private float BossSpawntimer = 0.0f;
     private float spawntime = 0.0f;
     private float tankSpawnTime = 5.0f;
+    public float SpawnPositionX;//床などの生成場所のx座標
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
     private int GenerateLimit = 5;//ステージ連続生成の上限
-    public int Height;//床の高さ
-    private int A_Height;//空中床の高さ
-    private int high; // 1番高い
-    private int low = -7; // 1番低い
+    public float Height;//床の高さ
+    private float A_Height;//空中床の高さ
+    private float high; // 1番高い
+    private float low; // 1番低い
     private int dif = 0; // 差
     private int groundMadeCount = 0;
     private int AerialfloorMadeCount = 0;
@@ -50,16 +51,25 @@ public class AutoStage : MonoBehaviour
 
     private EnemySpawn enemySpawn;
 
+    public Vector3 rightTop;
+    public Vector3 leftBottom;
+
     void Start()
     {
-        Height = low; //最初の高さ
-        high = low + 3;
         A_Height = low;
         enemySpawn = FindObjectOfType<EnemySpawn>();
+        rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,0));
+        leftBottom = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        high = leftBottom.y+1.0f;
+        low = leftBottom.y-2.0f;
+        Height = low; //最初の高さ
+        SpawnPositionX = rightTop.x + 5.0f;
     }
 
     void Update()
     {
+        Debug.Log(rightTop);
+        Debug.Log(leftBottom);
         timer -= Time.deltaTime;
 
         if(timer < spawntime)
@@ -157,7 +167,7 @@ public class AutoStage : MonoBehaviour
         //戦車戦のとき
         if (isTankBossBattle || debug)
         {
-            Instantiate(Cube,new Vector3(14,-6,0),Quaternion.identity);//ステージの高さを一定にして生成
+            Instantiate(Cube, new Vector3(SpawnPositionX, leftBottom.y-2.0f, 0), Quaternion.identity);//ステージの高さを一定にして生成
             timer = 2.0f;
             return;
         }
@@ -183,7 +193,7 @@ public class AutoStage : MonoBehaviour
             {
                 Height = high;
             }
-            Instantiate(Cube, new Vector3(14, Height, 0), Quaternion.identity);
+            Instantiate(Cube, new Vector3(SpawnPositionX, Height, 0), Quaternion.identity);
         }
 
         //敵出現の調整
@@ -213,8 +223,8 @@ public class AutoStage : MonoBehaviour
             //壁戦専用
             timer = 6.0f;
             float Adif = Random.Range(-1.0f, 1.0f);
-            Instantiate(Aerial, new Vector3(16, A_Height + 4, 0), Quaternion.identity);
-            Instantiate(Aerial, new Vector3(20, A_Height + 4 + Adif), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, A_Height + 4, 0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+6.0f, A_Height + 4 + Adif,0), Quaternion.identity);
 
             isHallMade = true;
             AerialfloorMadeCount = 0;
@@ -225,7 +235,7 @@ public class AutoStage : MonoBehaviour
         if (isNormalStage || isHelicopterBossBattle)
         {
             //直前の床の高さより少し高い高さで生成
-            Instantiate(Aerial, new Vector3(16, A_Height + 4, 0), Quaternion.identity);
+            Instantiate(Aerial, new Vector3(SpawnPositionX+2.0f, A_Height + 4, 0), Quaternion.identity);
         }
 
         //最後に穴ができるから
@@ -259,7 +269,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(15, 0, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(SpawnPositionX, rightTop.y-2.5f, 0), Quaternion.identity);
     }
 
     //壁戦
@@ -273,7 +283,7 @@ public class AutoStage : MonoBehaviour
     //壁出現
     private void WallSpawn()
     {
-        Instantiate(Wall, new Vector3(16,0,0),Quaternion.identity);
+        Instantiate(Wall, new Vector3(SpawnPositionX, 0,0),Quaternion.identity);
     }
 
     //ヘリ戦
@@ -287,6 +297,6 @@ public class AutoStage : MonoBehaviour
     //ヘリ出現
     private void HelicopterSpawn()
     {
-        Instantiate(Helicopter, new Vector3(16,3.5f,0),Quaternion.identity);
+        Instantiate(Helicopter, new Vector3(SpawnPositionX, rightTop.y-2.5f,0),Quaternion.identity);
     }
 }

@@ -36,7 +36,7 @@ public class TankMove : MonoBehaviour
     {
         //画面外から戦車が出てくる
         transform.position += new Vector3(speed,0,0)*Time.deltaTime;
-        if (transform.position.x <= 6.0f)
+        if (transform.position.x <= autoStage.rightTop.x-2.0f)
         {
             onStage = true;
         }
