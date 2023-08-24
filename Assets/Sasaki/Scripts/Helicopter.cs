@@ -37,6 +37,7 @@ public class Helicopter : MonoBehaviour
     private bool AttackCheck = true;
 
     private PlayerControll playerControll;
+    private AutoStage autoStage;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class Helicopter : MonoBehaviour
         VerticalMove = true;
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
         playerControll = FindObjectOfType<PlayerControll>();
+        autoStage = FindObjectOfType<AutoStage>();
     }
 
     // Update is called once per frame
@@ -62,8 +64,8 @@ public class Helicopter : MonoBehaviour
         {
             VerticalMove = false;
             HorizontalMove = true;
-            VerticalHeight = 8.0f;
-            height = 8.5f;
+            VerticalHeight = autoStage.rightTop.y;
+            height = autoStage.rightTop.y;
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
         if (MoveCount == ChangeCount+1)
@@ -82,8 +84,8 @@ public class Helicopter : MonoBehaviour
         }
         if (MoveCount == MaxCount-1)
         {
-            VerticalHeight = 8.0f;
-            height = 9.0f;
+            VerticalHeight = autoStage.rightTop.y;
+            height = autoStage.rightTop.y;
         }
         if (MoveCount == MaxCount)
         {
@@ -98,9 +100,9 @@ public class Helicopter : MonoBehaviour
         //…•½ˆÚ“®
         if (VerticalMove)
         {
-            transform.position = new Vector3(cos * HorizontalWidth, HorizontalHeight, 0);
+            transform.position = new Vector3(cos * (autoStage.rightTop.x+1.0f)*2, autoStage.rightTop.y-2.5f, 0);
 
-            if (transform.position.x >= -4.0f && transform.position.x <= 4.0f)
+            if (transform.position.x >= autoStage.leftBottom.x && transform.position.x <= autoStage.rightTop.x)
             {
                 BombTimer -= Time.deltaTime;
             }
@@ -134,7 +136,7 @@ public class Helicopter : MonoBehaviour
 
 
         //‰ñ“]
-        if (transform.position.x <= -(HorizontalWidth-1.0f) || transform.position.x >= (HorizontalWidth-1.0f))
+        if (transform.position.x <= autoStage.leftBottom.x-3.5f || transform.position.x >= autoStage.rightTop.x+3.5f)
         {
             if (lotateCheck)
             {
