@@ -43,7 +43,7 @@ public class CannonballMove : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             lifeManager.HideHeart();
-            Destroy(Cannonball);
+            Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "Bullet1")
         {

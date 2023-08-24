@@ -36,13 +36,17 @@ public class AutoStage : MonoBehaviour
     bool DestroyTank = false;
     bool DestroyWall = false;
 
-    [SerializeField] private float y = 0.0f;
-
+    [SerializeField]
+    private float y = 0.0f;
+    [SerializeField]
+    private GameObject EnemySpawn;
     [SerializeField]
     bool debug = false;
 
     [SerializeField]
     private GameObject OSAttack;
+    [SerializeField]
+    private GameObject GaugeManager;
 
     private EnemySpawn enemySpawn;
 
@@ -239,11 +243,14 @@ public class AutoStage : MonoBehaviour
         isWallBossBattle = false;
         isHelicopterBossBattle = false;
         isNormalStage = true;
+        EnemySpawn.SetActive(true);
+        OSAttack.SetActive(true);
     }
 
     //戦車戦
     public void TankBattle()
     {
+        EnemySpawn.SetActive(false);
         OSAttack.SetActive(false);
         isTankBossBattle = true;
         Invoke(nameof(TankSpawn),8.0f);
@@ -252,7 +259,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(16, 0, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(15, 0, 0), Quaternion.identity);
     }
 
     //壁戦

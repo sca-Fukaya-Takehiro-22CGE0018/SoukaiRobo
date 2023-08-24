@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int maxEnemy = 2;//最大撃破数
     [SerializeField] Image image = null;
     [SerializeField] GameObject panel = null;
+    private bool tankBattle = false;
+    private bool wallBattle = true;
+    private bool helicopterBattle = false;
     private PanelManager panelManager;
     private AutoStage autoStage;
 
@@ -59,7 +62,24 @@ public class GameManager : MonoBehaviour
             Debug.Log(defeat);
             Debug.Log("aa");
             defeat = 0;
-            //SceneManager.LoadScene(2);
+            if (!tankBattle)
+            {
+                tankBattle = true;
+                autoStage.TankBattle();
+                return;
+            }
+            if (!wallBattle)
+            {
+                wallBattle = true;
+                autoStage.WallBattle();
+                return;
+            }
+            if (!helicopterBattle)
+            {
+                helicopterBattle = true;
+                autoStage.HelicopterBattle();
+                return;
+            }
         }
     }
 }

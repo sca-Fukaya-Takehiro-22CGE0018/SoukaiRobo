@@ -20,6 +20,7 @@ public class TankMove : MonoBehaviour
     private bool onStage = false;
 
     private PlayerControll playerControll;
+    private AutoStage autoStage;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class TankMove : MonoBehaviour
         speed = -2.0f;
         CannonballTimer = CannonCoolTime;
         MissileTimer = MissileCoolTime;
+        autoStage = FindObjectOfType<AutoStage>();
     }
 
     // Update is called once per frame
@@ -91,6 +93,7 @@ public class TankMove : MonoBehaviour
         if (Hp <= -0)
         {
             Destroy(this.gameObject);
+            autoStage.NormalStage();
         }
     }
 }
