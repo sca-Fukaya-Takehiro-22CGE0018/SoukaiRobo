@@ -21,7 +21,7 @@ public class OffScreenAttack : MonoBehaviour
 
     private GameObject player;
     public float hp = 0;//体力
-    public float EnemyBulletPower = 1;//ダメージ量
+    public float EnemyBulletPower = 0;//ダメージ量
     private PlayerControll playerControll;
     private GameManager gameManager;
     private Animator anim;
@@ -40,7 +40,7 @@ public class OffScreenAttack : MonoBehaviour
     {
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.gameManager = FindObjectOfType<GameManager>();
-        InvokeRepeating("SpawnBulletBurst", delay, delay);
+        InvokeRepeating("SpawnBulletBurst", delay,delay);
     }
 
     // Update is called once per frame

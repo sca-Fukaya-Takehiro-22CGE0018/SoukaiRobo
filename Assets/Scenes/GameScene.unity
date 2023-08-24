@@ -2567,7 +2567,7 @@ PrefabInstance:
     - target: {fileID: 6746270116640897101, guid: 4341fa646ee773a4a81e40984fb4c0f4,
         type: 3}
       propertyPath: burstCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6746270116640897101, guid: 4341fa646ee773a4a81e40984fb4c0f4,
         type: 3}
@@ -2589,6 +2589,11 @@ PrefabInstance:
       propertyPath: EnemyBulletPoint
       value: 
       objectReference: {fileID: 216151506}
+    - target: {fileID: 6746270116640897101, guid: 4341fa646ee773a4a81e40984fb4c0f4,
+        type: 3}
+      propertyPath: EnemyBulletPower
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4341fa646ee773a4a81e40984fb4c0f4, type: 3}
 --- !u!212 &6849662387359362463
