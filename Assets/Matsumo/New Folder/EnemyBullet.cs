@@ -26,7 +26,6 @@ public class EnemyBullet : MonoBehaviour
         {
             //playerに当たったら消える
             Destroy(this.gameObject);
-            lifeManager.HideHeart();
         }
         if(collider2D.gameObject.tag == "Bullet1" || collider2D.gameObject.tag == "Bullet2")
         {

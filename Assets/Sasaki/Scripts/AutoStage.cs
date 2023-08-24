@@ -199,8 +199,11 @@ public class AutoStage : MonoBehaviour
         //敵出現の調整
         if (EnemyCount == 2)
         {
-            enemySpawn.SpawnEnemy();
-            EnemyCount = 0;
+            if (dif >= 0.0f)
+            {
+                enemySpawn.SpawnEnemy();
+                EnemyCount = 0;
+            }
         }
         ++EnemyCount;
 

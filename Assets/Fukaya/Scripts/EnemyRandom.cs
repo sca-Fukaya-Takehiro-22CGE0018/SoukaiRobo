@@ -12,12 +12,15 @@ public class EnemyRandom : MonoBehaviour
     int frame = 0;
     [SerializeField] int generateFrame = 30;        // 生成する間隔
 
+    private AutoStage autoStage;
+
     void Start()
     {
         minX = Mathf.Min(pos.position.x, pos2.position.x);
         maxX = Mathf.Max(pos.position.x, pos2.position.x);
         minY = Mathf.Min(pos.position.y, pos2.position.y);
         maxY = Mathf.Max(pos.position.y, pos2.position.y);
+        autoStage = FindObjectOfType<AutoStage>();
     }
 
     void Update()
@@ -33,7 +36,7 @@ public class EnemyRandom : MonoBehaviour
             float posX = Random.Range(minX, maxX);
             float posY = Random.Range(minY, maxY);
 
-            Instantiate(enemyList[index], new Vector3(posX, posY, 0), Quaternion.identity);
+            Instantiate(enemyList[index], new Vector3(autoStage.rightTop.x+2.0f, autoStage.rightTop.y, 0), Quaternion.identity);
         }
     }
 }
