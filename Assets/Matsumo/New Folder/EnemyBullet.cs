@@ -9,7 +9,7 @@ public class EnemyBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.FindWithTag("Player");
+        //playerObject = GameObject.FindWithTag("Player");
         lifeManager = FindObjectOfType<LifeManager>();
     }
 
@@ -33,14 +33,10 @@ public class EnemyBullet : MonoBehaviour
             Destroy(collider2D.gameObject);
             //playerの弾に当たったら消える
             Destroy(this.gameObject);
-            GameObject obj1 = GameObject.Find("Bullet1");
-            Destroy(obj1);
         }
         if (collider2D.gameObject.tag == "Bullet2")
         {
             Destroy(this.gameObject);
-            GameObject obj2 = GameObject.Find("Bullet2");
-            Destroy(obj2);
         }
     }
 }
