@@ -11,9 +11,7 @@ public class GameManager : MonoBehaviour
     int maxEnemy = 10;//最大撃破数
     [SerializeField] Image image = null;
     [SerializeField] GameObject panel = null;
-    private bool tankBattle = false;
-    private bool wallBattle = true;
-    private bool helicopterBattle = false;
+    private int Wave = 0;
     private PanelManager panelManager;
     private AutoStage autoStage;
 
@@ -60,22 +58,21 @@ public class GameManager : MonoBehaviour
         if (defeat == maxEnemy)
         {
             defeat = 0;
-            if (!tankBattle)
+            if (Wave == 0)
             {
-                Instantiate(Tank,new Vector3(2,4,0),Quaternion.identity);
-                tankBattle = true;
+                Wave = 1;
                 autoStage.TankBattle();
                 return;
             }
-            if (!wallBattle)
+            //if (!wallBattle)
+            //{
+            //    wallBattle = true;
+            //    autoStage.WallBattle();
+            //    return;
+            //}
+            if (Wave == 1)
             {
-                wallBattle = true;
-                autoStage.WallBattle();
-                return;
-            }
-            if (!helicopterBattle)
-            {
-                helicopterBattle = true;
+                Wave = 2;
                 autoStage.HelicopterBattle();
                 return;
             }
