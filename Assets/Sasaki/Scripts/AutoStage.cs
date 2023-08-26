@@ -7,7 +7,6 @@ public class AutoStage : MonoBehaviour
     public GameObject Cube;
     public GameObject Aerial;
     public GameObject Tank;
-    public GameObject Wall;
     public GameObject Helicopter;
 
     private float timer = 2.0f;
@@ -283,7 +282,7 @@ public class AutoStage : MonoBehaviour
     //壁出現
     private void WallSpawn()
     {
-        Instantiate(Wall, new Vector3(SpawnPositionX, 0,0),Quaternion.identity);
+        //Instantiate(Wall, new Vector3(SpawnPositionX, 0,0),Quaternion.identity);
     }
 
     //ヘリ戦
