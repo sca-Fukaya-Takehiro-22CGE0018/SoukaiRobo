@@ -144,5 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bomb: {fileID: 5813056181169743457, guid: f11f168cca8649e4aa32baa682097636, type: 3}
+  Battery: {fileID: 9037471193332821481, guid: 6a45256d3459464418ccc47d6c961084, type: 3}
   HelicopterBullet: {fileID: 3846281676282197554, guid: b63f072329e695d409e4c6418e4e1e3f,
     type: 3}

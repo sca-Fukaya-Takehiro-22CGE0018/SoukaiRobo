@@ -46,8 +46,8 @@ public class TracEnemy : MonoBehaviour
         //当たり判定
         if (collider2D.gameObject.tag == "Bullet1")
         {
+            Destroy(collider2D.gameObject);
             hp = hp -= playerControll.Bullet1Power;
-            
         }
         if(collider2D.gameObject.tag == "Bullet2")
         {

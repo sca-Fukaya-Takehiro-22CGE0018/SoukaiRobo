@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6489802308476180295}
   - component: {fileID: 6489802308476180344}
   m_Layer: 0
-  m_Name: "\u6226\u8ECA"
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,3 +146,4 @@ MonoBehaviour:
   Cannonball: {fileID: 6313550523863748084, guid: c5d25ee4ad0d8e54cad7920683974648,
     type: 3}
   Missile: {fileID: 6601079845463321028, guid: 127eab8a944c96b4aa2049b9114f2b0e, type: 3}
+  Hp: 100

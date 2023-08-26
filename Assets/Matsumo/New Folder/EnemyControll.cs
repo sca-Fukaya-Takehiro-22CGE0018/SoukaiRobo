@@ -80,6 +80,7 @@ public class EnemyControll : MonoBehaviour
         //“–‚½‚è”»’è
         if (collider2D.gameObject.tag == "Bullet1")
         {
+            Destroy(collider2D.gameObject);
             hp = hp -= playerControll.Bullet1Power;
         }
         if (collider2D.gameObject.tag == "Bullet2")

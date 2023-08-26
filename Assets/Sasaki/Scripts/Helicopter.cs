@@ -13,7 +13,7 @@ public class Helicopter : MonoBehaviour
     private float VerticalHeight = 2.0f;//‚’¼ˆÚ“®‚Ì‚‚³(•)
     private float height = 1.0f;//‚’¼ˆÚ“®‚Ì‚‚³’²®
     private float speed = 2.0f;//ˆÚ“®‘¬“x
-    private float Hp = 100;//ƒwƒŠ‚ÌHP
+    private float Hp = 70;//ƒwƒŠ‚ÌHP
     private int MoveCount = 0;
     private int ChangeCount = 4;//ˆÚ“®‚ÌŒü‚«•ÏX
     private int MaxCount = 10;
@@ -25,6 +25,8 @@ public class Helicopter : MonoBehaviour
     //UŒ‚ŠÖŒW
     [SerializeField]
     private GameObject Bomb;
+    [SerializeField]
+    private GameObject Battery;
     [SerializeField]
     private GameObject HelicopterBullet;
     private GameObject player;
@@ -72,7 +74,6 @@ public class Helicopter : MonoBehaviour
         }
         if (MoveCount == ChangeCount+1)
         {
-            //VerticalHeight = 2.0f;
             VerticalHeight = 1.0f;
             height = 2.0f;
         }
@@ -160,7 +161,15 @@ public class Helicopter : MonoBehaviour
 
     void BombAttack()
     {
-        Instantiate(Bomb,this.transform.position,Quaternion.identity);
+        int BatteryDrop = Random.Range(0,20);
+        if (BatteryDrop == 1)
+        {
+            Instantiate(Battery, this.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(Bomb, this.transform.position, Quaternion.identity);
+        }
     }
 
     void BulletsAttack()
@@ -189,6 +198,7 @@ public class Helicopter : MonoBehaviour
     {
         if (collider2D.gameObject.tag == "Bullet1")
         {
+            Destroy(collider2D.gameObject);
             Hp = Hp -= playerControll.Bullet1Power;
         }
         if (collider2D.gameObject.tag == "Bullet2")

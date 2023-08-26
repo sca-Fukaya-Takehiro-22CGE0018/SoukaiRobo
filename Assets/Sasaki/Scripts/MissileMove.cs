@@ -57,6 +57,7 @@ public class MissileMove : MonoBehaviour
         }
         if (other.gameObject.tag == "Bullet1")
         {
+            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "Bullet2")

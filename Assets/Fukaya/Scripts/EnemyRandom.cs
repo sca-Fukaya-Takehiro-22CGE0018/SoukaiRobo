@@ -10,7 +10,7 @@ public class EnemyRandom : MonoBehaviour
     float minX, maxX, minY, maxY;                   // 生成範囲
 
     float spawn = 0;
-    [SerializeField] int generate = 8;        // 生成する間隔
+    [SerializeField] int generate = 4;        // 生成する間隔
 
     private AutoStage autoStage;
 

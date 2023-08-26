@@ -24,15 +24,21 @@ public class EnemyBullet : MonoBehaviour
         //当たり判定
         if(collider2D.gameObject.tag == "Player")
         {
+            lifeManager.HideHeart();
             //playerに当たったら消える
             Destroy(this.gameObject);
         }
-        if(collider2D.gameObject.tag == "Bullet1" || collider2D.gameObject.tag == "Bullet2")
+        if(collider2D.gameObject.tag == "Bullet1")
         {
+            Destroy(collider2D.gameObject);
             //playerの弾に当たったら消える
             Destroy(this.gameObject);
             GameObject obj1 = GameObject.Find("Bullet1");
             Destroy(obj1);
+        }
+        if (collider2D.gameObject.tag == "Bullet2")
+        {
+            Destroy(this.gameObject);
             GameObject obj2 = GameObject.Find("Bullet2");
             Destroy(obj2);
         }

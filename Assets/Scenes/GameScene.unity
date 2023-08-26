@@ -1459,7 +1459,7 @@ MonoBehaviour:
   - {fileID: 5876445949654838218, guid: c5959794d435db84ca65b98b9636840b, type: 3}
   pos: {fileID: 1037385277}
   pos2: {fileID: 1037385277}
-  generate: 8
+  generate: 4
 --- !u!4 &1037385277
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class TankMove : MonoBehaviour
     private GameObject Missile;//ミサイル
 
     private float speed;//戦車が出てくるときのスピード
-    private float Hp = 100;//戦車のHP
+    [SerializeField] private float Hp = 100;//戦車のHP
     private float CannonballTimer;//砲弾発射までの時間
     private float MissileTimer;//ミサイル発射までの時間
     private float CannonCoolTime = 3.0f;//砲弾発射のクールタイム
@@ -84,6 +84,7 @@ public class TankMove : MonoBehaviour
     {
         if (collider2D.gameObject.tag == "Bullet1")
         {
+            Destroy(collider2D.gameObject);
             Hp = Hp -= playerControll.Bullet1Power;
         }
         if (collider2D.gameObject.tag == "Bullet2")

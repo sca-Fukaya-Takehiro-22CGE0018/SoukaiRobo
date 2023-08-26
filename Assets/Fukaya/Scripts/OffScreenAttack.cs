@@ -13,7 +13,7 @@ public class OffScreenAttack : MonoBehaviour
     [SerializeField]//射撃間隔
     float delay;
     [SerializeField]//連射間隔
-    int burstCount = 3;
+    int burstCount = 1;
     [SerializeField]//連射の間隔
     float burstInterval = 0.02f;
     [SerializeField]//エフェクトプレハブ
@@ -75,6 +75,19 @@ public class OffScreenAttack : MonoBehaviour
             yield return new WaitForSeconds(burstInterval);
         }
     }
+
+    public void SwitchCount()
+    {
+        if (burstCount >= 1)
+        {
+            burstCount = 0;
+        }
+        else if (burstCount <= 0)
+        {
+            burstCount = 1;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         //当たり判定

@@ -51,6 +51,7 @@ public class AutoStage : MonoBehaviour
     private GameObject GaugeManager;
 
     private EnemySpawn enemySpawn;
+    private OffScreenAttack offScreenAttack;
 
     public Vector3 rightTop;
     public Vector3 leftBottom;
@@ -59,6 +60,7 @@ public class AutoStage : MonoBehaviour
     {
         A_Height = low;
         enemySpawn = FindObjectOfType<EnemySpawn>();
+        offScreenAttack = FindObjectOfType<OffScreenAttack>();
         rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,0));
         leftBottom = Camera.main.ScreenToWorldPoint(Vector3.zero);
         high = leftBottom.y+1.0f;
@@ -259,14 +261,16 @@ public class AutoStage : MonoBehaviour
         isHelicopterBossBattle = false;
         isNormalStage = true;
         EnemySpawn.SetActive(true);
-        OSAttack.SetActive(true);
+        offScreenAttack.SwitchCount();
+        //OSAttack.SetActive(true);
     }
 
     //戦車戦
     public void TankBattle()
     {
         EnemySpawn.SetActive(false);
-        OSAttack.SetActive(false);
+        offScreenAttack.SwitchCount();
+        //OSAttack.SetActive(false);
         isTankBossBattle = true;
         Invoke(nameof(TankSpawn),8.0f);
     }
@@ -280,7 +284,8 @@ public class AutoStage : MonoBehaviour
     //壁戦
     public void WallBattle()
     {
-        OSAttack.SetActive(false);
+        //OSAttack.SetActive(false);
+        offScreenAttack.SwitchCount();
         isWallBossBattle = true;
         Invoke(nameof(WallSpawn),8.0f);
     }
@@ -294,7 +299,9 @@ public class AutoStage : MonoBehaviour
     //ヘリ戦
     public void HelicopterBattle()
     {
-        OSAttack.SetActive(false);
+        //OSAttack.SetActive(false);
+        offScreenAttack.SwitchCount();
+        EnemySpawn.SetActive(false);
         isHelicopterBossBattle = true;
         Invoke(nameof(HelicopterSpawn),8.0f);
     }

@@ -133,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7c75eed632e4b4aad3b19763a8e105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Battery: {fileID: 8843565704305861461, guid: 85ab2498005f85242ac2194031bf2780, type: 3}
