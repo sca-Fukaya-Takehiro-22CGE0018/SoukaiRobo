@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] int defeat = 0;//撃破数
-    [SerializeField] int maxEnemy = 10;//最大撃破数
+    int defeat = 0;//撃破数
+    int maxEnemy = 10;//最大撃破数
     [SerializeField] Image image = null;
     [SerializeField] GameObject panel = null;
     private bool tankBattle = false;
