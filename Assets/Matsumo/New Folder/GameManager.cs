@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private AutoStage autoStage;
 
     private bool TankBattle = false;
+    [SerializeField] GameObject Tank;
 
     private void Awake()
     {
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
             defeat = 0;
             if (!tankBattle)
             {
+                Instantiate(Tank,new Vector3(2,4,0),Quaternion.identity);
                 tankBattle = true;
                 autoStage.TankBattle();
                 return;

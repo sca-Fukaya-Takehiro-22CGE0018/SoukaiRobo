@@ -153,6 +153,12 @@ PrefabInstance:
       propertyPath: maxEnemy
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5093437476398057344, guid: 3d2976b1d7817e745ab6ea0d7d5c2661,
+        type: 3}
+      propertyPath: Tank
+      value: 
+      objectReference: {fileID: 6489802308476180291, guid: 10028eee47a8e5e428fb8fa09f000129,
+        type: 3}
     - target: {fileID: 5093437476398057345, guid: 3d2976b1d7817e745ab6ea0d7d5c2661,
         type: 3}
       propertyPath: m_Name
@@ -713,16 +719,11 @@ MonoBehaviour:
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
   Tank: {fileID: 6489802308476180291, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
-  Wall: {fileID: 0}
   Helicopter: {fileID: 190032256588879222, guid: 7bf566942b6bf7949b3afe9eb80c647f,
     type: 3}
   SpawnPositionX: 0
   Height: 0
-  y: 0
-  EnemySpawn: {fileID: 1037385275}
-  debug: 0
-  OSAttack: {fileID: 2112780576}
-  GaugeManager: {fileID: 1422528259}
+  isNormalStage: 1
   rightTop: {x: 0, y: 0, z: 0}
   leftBottom: {x: 0, y: 0, z: 0}
 --- !u!4 &518134535
@@ -1459,7 +1460,6 @@ MonoBehaviour:
   - {fileID: 5876445949654838218, guid: c5959794d435db84ca65b98b9636840b, type: 3}
   pos: {fileID: 1037385277}
   pos2: {fileID: 1037385277}
-  generate: 4
 --- !u!4 &1037385277
 Transform:
   m_ObjectHideFlags: 0
@@ -2712,12 +2712,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2112780576 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6746270116640897100, guid: 4341fa646ee773a4a81e40984fb4c0f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6746270117793827294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4539095211717968231
 MonoBehaviour:
   m_ObjectHideFlags: 0

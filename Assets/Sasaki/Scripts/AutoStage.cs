@@ -257,7 +257,6 @@ public class AutoStage : MonoBehaviour
     public void TankBattle()
     {
         offScreenAttack.SwitchCount();
-        //OSAttack.SetActive(false);
         isTankBossBattle = true;
         isNormalStage =false;
         Invoke(nameof(TankSpawn),8.0f);
