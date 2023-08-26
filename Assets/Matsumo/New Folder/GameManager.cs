@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
     {
         if (defeat == maxEnemy)
         {
-            Debug.Log(defeat);
-            Debug.Log("aa");
             defeat = 0;
             if (!tankBattle)
             {
