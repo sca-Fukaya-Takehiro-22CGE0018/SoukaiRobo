@@ -278,7 +278,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(SpawnPositionX, rightTop.y-2.5f, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(SpawnPositionX+2.0f, rightTop.y-2.5f, 0), Quaternion.identity);
     }
 
     //壁戦
@@ -287,7 +287,7 @@ public class AutoStage : MonoBehaviour
         //OSAttack.SetActive(false);
         offScreenAttack.SwitchCount();
         isWallBossBattle = true;
-        Invoke(nameof(WallSpawn),8.0f);
+        Invoke(nameof(WallSpawn),5.0f);
     }
 
     //壁出現
@@ -299,11 +299,12 @@ public class AutoStage : MonoBehaviour
     //ヘリ戦
     public void HelicopterBattle()
     {
+        high = leftBottom.y-1.0f;
         //OSAttack.SetActive(false);
         offScreenAttack.SwitchCount();
         EnemySpawn.SetActive(false);
         isHelicopterBossBattle = true;
-        Invoke(nameof(HelicopterSpawn),8.0f);
+        Invoke(nameof(HelicopterSpawn),5.0f);
     }
 
     //ヘリ出現
