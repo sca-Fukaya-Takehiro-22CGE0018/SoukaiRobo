@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     private AutoStage autoStage;
 
     private bool TankBattle = false;
-    [SerializeField] GameObject Tank;
 
     private void Awake()
     {
