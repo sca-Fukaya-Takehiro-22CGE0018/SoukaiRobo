@@ -38,11 +38,7 @@ public class AutoStage : MonoBehaviour
     bool DestroyTank = false;
     bool DestroyWall = false;
     private float y = 0.0f;
-    [SerializeField]
-    private GameObject EnemySpawn;
     bool debug = false;
-    [SerializeField]
-    private GameObject GaugeManager;
 
     private EnemySpawn enemySpawn;
     private OffScreenAttack offScreenAttack;
@@ -254,7 +250,6 @@ public class AutoStage : MonoBehaviour
         isWallBossBattle = false;
         isHelicopterBossBattle = false;
         isNormalStage = true;
-        EnemySpawn.SetActive(true);
         offScreenAttack.SwitchCount();
         //OSAttack.SetActive(true);
     }
@@ -262,10 +257,10 @@ public class AutoStage : MonoBehaviour
     //戦車戦
     public void TankBattle()
     {
-        EnemySpawn.SetActive(false);
         offScreenAttack.SwitchCount();
         //OSAttack.SetActive(false);
         isTankBossBattle = true;
+        isNormalStage =false;
         Invoke(nameof(TankSpawn),8.0f);
     }
 
@@ -281,6 +276,7 @@ public class AutoStage : MonoBehaviour
         //OSAttack.SetActive(false);
         offScreenAttack.SwitchCount();
         isWallBossBattle = true;
+        isNormalStage = false;
         Invoke(nameof(WallSpawn),5.0f);
     }
 
@@ -296,8 +292,8 @@ public class AutoStage : MonoBehaviour
         high = leftBottom.y-1.0f;
         //OSAttack.SetActive(false);
         offScreenAttack.SwitchCount();
-        EnemySpawn.SetActive(false);
         isHelicopterBossBattle = true;
+        isNormalStage = false;
         Invoke(nameof(HelicopterSpawn),5.0f);
     }
 
