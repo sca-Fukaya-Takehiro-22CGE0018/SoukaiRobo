@@ -25,7 +25,10 @@ public class EnemyRandom : MonoBehaviour
 
     void Update()
     {
-        spawn += Time.deltaTime;
+        if (autoStage.isNormalStage)
+        {
+            spawn += Time.deltaTime;
+        }
 
         if (spawn > generate)
         {

@@ -29,7 +29,7 @@ public class AutoStage : MonoBehaviour
     private int EnemyCount = 0;
     private bool isHallMade = false;//直前に穴が作られた
     private bool makeAerialfloor = false;
-    private bool isNormalStage = true;
+    public bool isNormalStage = true;
     private bool isTankBossBattle = false;
     private bool isWallBossBattle = false;
     private bool isHelicopterBossBattle = false;
@@ -37,16 +37,10 @@ public class AutoStage : MonoBehaviour
     int BossCount = 0;
     bool DestroyTank = false;
     bool DestroyWall = false;
-
-    [SerializeField]
     private float y = 0.0f;
     [SerializeField]
     private GameObject EnemySpawn;
-    [SerializeField]
     bool debug = false;
-
-    [SerializeField]
-    private GameObject OSAttack;
     [SerializeField]
     private GameObject GaugeManager;
 

@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         //当たり判定
-        if (collider2D.gameObject.tag == "EnemyBullet" || collider2D.gameObject.tag == "TracEnemy")
+        if (collider2D.gameObject.tag == "TracEnemy")
         {
             lifeManager.HideHeart();
         }
