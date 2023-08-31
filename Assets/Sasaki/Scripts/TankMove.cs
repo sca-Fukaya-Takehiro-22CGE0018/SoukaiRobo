@@ -9,6 +9,8 @@ public class TankMove : MonoBehaviour
     private GameObject Cannonball;//砲弾
     [SerializeField]
     private GameObject Missile;//ミサイル
+    [SerializeField]
+    GameObject Anim;
 
     private float speed;//戦車が出てくるときのスピード
     [SerializeField] private float Hp = 100;//戦車のHP
@@ -21,6 +23,7 @@ public class TankMove : MonoBehaviour
 
     private PlayerControll playerControll;
     private AutoStage autoStage;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class TankMove : MonoBehaviour
         CannonballTimer = CannonCoolTime;
         MissileTimer = MissileCoolTime;
         autoStage = FindObjectOfType<AutoStage>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -93,6 +97,7 @@ public class TankMove : MonoBehaviour
         }
         if (Hp <= -0)
         {
+            Instantiate(Anim,transform.position,Quaternion.identity);
             Destroy(this.gameObject);
             autoStage.NormalStage();
         }

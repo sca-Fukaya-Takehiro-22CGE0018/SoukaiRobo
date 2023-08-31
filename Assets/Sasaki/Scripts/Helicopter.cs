@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Helicopter : MonoBehaviour
 {
+    [SerializeField]
+    GameObject Anim;
     //à⁄ìÆä÷åW
     private float cos;
     private float HorizontalWidth = 16.0f;//â°à⁄ìÆÇÃïù
@@ -41,6 +43,7 @@ public class Helicopter : MonoBehaviour
 
     private PlayerControll playerControll;
     private AutoStage autoStage;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,7 @@ public class Helicopter : MonoBehaviour
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
         playerControll = FindObjectOfType<PlayerControll>();
         autoStage = FindObjectOfType<AutoStage>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -229,6 +233,7 @@ public class Helicopter : MonoBehaviour
         }
         if (Hp <= -0)
         {
+            Instantiate(Anim,transform.position,Quaternion.identity);
             Destroy(this.gameObject);
             SceneManager.LoadScene("ResultScene");
         }
