@@ -10,9 +10,7 @@ public class AutoStage : MonoBehaviour
     public GameObject Helicopter;
 
     private float timer = 2.0f;
-    private float BossSpawntimer = 0.0f;
     private float spawntime = 0.0f;
-    private float tankSpawnTime = 5.0f;
     public float SpawnPositionX;//床などの生成場所のx座標
     private int Max = 3;// 1/Maxの値 の確率で穴を生成
     private int GenerateLimit = 5;//ステージ連続生成の上限
@@ -29,14 +27,10 @@ public class AutoStage : MonoBehaviour
     private bool isHallMade = false;//直前に穴が作られた
     private bool makeAerialfloor = false;
     public bool isNormalStage = true;
-    private bool isTankBossBattle = false;
-    private bool isWallBossBattle = false;
-    private bool isHelicopterBossBattle = false;
+    public bool isTankBossBattle = false;
+    public bool isWallBossBattle = false;
+    public bool isHelicopterBossBattle = false;
 
-    int BossCount = 0;
-    bool DestroyTank = false;
-    bool DestroyWall = false;
-    private float y = 0.0f;
     bool debug = false;
 
     private EnemySpawn enemySpawn;
@@ -60,8 +54,6 @@ public class AutoStage : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rightTop);
-        Debug.Log(leftBottom);
         timer -= Time.deltaTime;
 
         if(timer < spawntime)
@@ -99,19 +91,6 @@ public class AutoStage : MonoBehaviour
         //生成しない
         if (!CanGenerateStage())
         {
-            //壁戦のとき(デバッグ用)
-            if (isWallBossBattle)
-            {
-                BossCount++;
-                if (BossCount >= 4)
-                {
-                    DestroyWall = true;
-                    Debug.Log("ボスがやられた");
-                    isWallBossBattle = false;
-                    GenerateLimit = 5;
-                    BossCount = 0;
-                }
-            }
 
             //壁戦のとき
             if (isWallBossBattle)
@@ -256,11 +235,13 @@ public class AutoStage : MonoBehaviour
     //戦車戦
     public void TankBattle()
     {
+        Debug.Log("TankBattle");
         offScreenAttack.SwitchCount();
         isTankBossBattle = true;
         isNormalStage =false;
-        Invoke(nameof(TankSpawn),8.0f);
+        StartCoroutine(Wait());
     }
+
 
     //戦車出現
     private void TankSpawn()
@@ -275,7 +256,7 @@ public class AutoStage : MonoBehaviour
         offScreenAttack.SwitchCount();
         isWallBossBattle = true;
         isNormalStage = false;
-        Invoke(nameof(WallSpawn),5.0f);
+        StartCoroutine(Wait());
     }
 
     //壁出現
@@ -292,12 +273,28 @@ public class AutoStage : MonoBehaviour
         offScreenAttack.SwitchCount();
         isHelicopterBossBattle = true;
         isNormalStage = false;
-        Invoke(nameof(HelicopterSpawn),5.0f);
+        StartCoroutine(Wait());
     }
 
     //ヘリ出現
     private void HelicopterSpawn()
     {
         Instantiate(Helicopter, new Vector3(SpawnPositionX, rightTop.y-2.5f,0),Quaternion.identity);
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(5f);
+        if (isTankBossBattle)
+        {
+            TankSpawn();
+        }
+        else if (isWallBossBattle)
+        {
+            WallSpawn();
+        }
+        else if (isHelicopterBossBattle)
+        {
+            HelicopterSpawn();
+        }
     }
 }

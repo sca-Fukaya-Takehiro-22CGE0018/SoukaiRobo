@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     int defeat = 0;//撃破数
-    int maxEnemy = 10;//最大撃破数
+    int maxEnemy = 2;//最大撃破数
     [SerializeField] Image image = null;
     [SerializeField] GameObject panel = null;
     private int Wave = 0;
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private bool TankBattle = false;
 
+    private bool justOnce = true;
     private void Awake()
     {
         if (instance == null)
@@ -43,19 +44,36 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         panelManager = GetComponent<PanelManager>();
-        autoStage = FindObjectOfType<AutoStage>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Load();
+
+        if(SceneManager.GetActiveScene().name == "GameScene" && justOnce)
+        {
+            autoStage = FindObjectOfType<AutoStage>();
+            justOnce = false;
+            Wave = 0;
+            autoStage.isNormalStage = true;
+            autoStage.isTankBossBattle = false;
+            autoStage.isWallBossBattle = false;
+            autoStage.isHelicopterBossBattle = false;
+            EnemyDefeat = 0;
+        }
+
+        if(SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            justOnce = true;
+        }
     }
 
     public void Load()
     {
         if (defeat == maxEnemy)
         {
+            Debug.Log("ゲージがたまった");
             defeat = 0;
             if (Wave == 0)
             {

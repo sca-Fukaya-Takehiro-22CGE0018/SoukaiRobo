@@ -18,13 +18,13 @@ public class TitleController : MonoBehaviour
 
     public void GameScene()
     {
-        gameManager.EnemyDefeat = 0;
+        //gameManager.EnemyDefeat = 0;
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
     
     public void TitleScene()
     {
-        gameManager.EnemyDefeat = 0;
+        //gameManager.EnemyDefeat = 0;
         SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }
 }
