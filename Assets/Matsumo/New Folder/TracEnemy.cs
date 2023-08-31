@@ -51,14 +51,17 @@ public class TracEnemy : MonoBehaviour
         {
             Destroy(collider2D.gameObject);
             hp = hp -= playerControll.Bullet1Power;
+            Instantiate(Anim, transform.position, Quaternion.identity);
         }
         if(collider2D.gameObject.tag == "Bullet2")
         {
             hp = hp -= playerControll.Bullet2Power;
+            Instantiate(Anim, transform.position, Quaternion.identity);
         }
         if (collider2D.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+            Instantiate(Anim, transform.position, Quaternion.identity);
         }
         if (hp <= 0)
         {

@@ -496,6 +496,9 @@ MonoBehaviour:
   SpawnPositionX: 0
   Height: 0
   isNormalStage: 1
+  isTankBossBattle: 0
+  isWallBossBattle: 0
+  isHelicopterBossBattle: 0
   rightTop: {x: 0, y: 0, z: 0}
   leftBottom: {x: 0, y: 0, z: 0}
 --- !u!4 &518134535

@@ -9,6 +9,7 @@ public class DestroyEffect : MonoBehaviour
     private GameObject player;
     private Animator anim;
 
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
