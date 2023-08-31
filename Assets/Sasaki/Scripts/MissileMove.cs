@@ -6,7 +6,7 @@ public class MissileMove : MonoBehaviour
 {
     GameObject Player;
     GameObject Missile;
-    private float speed = 2.0f;
+    private float speed = 6.0f;
     private bool canScaleChange = false;
 
     Vector3 toDirection;
@@ -25,7 +25,7 @@ public class MissileMove : MonoBehaviour
 
     private IEnumerator ScaleChange()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         canScaleChange = true;
     }
 
@@ -38,7 +38,7 @@ public class MissileMove : MonoBehaviour
         //徐々に拡大
         if (canScaleChange)
         {
-            transform.localScale += new Vector3(0.06f, 0.06f, 0.0f) * Time.deltaTime;
+            transform.localScale += new Vector3(0.12f, 0.12f, 0.12f) * Time.deltaTime;
         }
         if (transform.localScale.x >= 0.2f)
         {

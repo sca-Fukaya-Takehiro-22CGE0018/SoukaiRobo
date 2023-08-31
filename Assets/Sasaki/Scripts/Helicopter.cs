@@ -14,9 +14,9 @@ public class Helicopter : MonoBehaviour
     private float height = 1.0f;//垂直移動の高さ調整
     private float speed = 2.0f;//移動速度
     private float Hp = 70;//ヘリのHP
-    private int MoveCount = 0;
-    private int ChangeCount = 4;//移動の向き変更
-    private int MaxCount = 10;
+    private int MoveCount = 2;
+    private int ChangeCount = 2;//移動の向き変更
+    private int MaxCount = 6;
     private bool lotateCheck = false;//回転するかの確認
     private bool VerticalMove = false;
     private bool HorizontalMove = false;
@@ -36,7 +36,7 @@ public class Helicopter : MonoBehaviour
     private float XshotPosition = 2.0f;
     private float YshotPosition = 2.0f;
     private float BulletSpeed = 6.0f;
-    private int AttackCount = 6;
+    private int AttackCount = 4;
     private bool AttackCheck = true;
 
     private PlayerControll playerControll;
@@ -45,7 +45,8 @@ public class Helicopter : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        VerticalMove = true;
+        VerticalMove = false;
+        HorizontalMove = true;
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
         playerControll = FindObjectOfType<PlayerControll>();
         autoStage = FindObjectOfType<AutoStage>();
@@ -54,7 +55,6 @@ public class Helicopter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Hp);
         cos = Mathf.Cos(Time.time * speed);
 
         //HPが0になったらplayerに突撃
@@ -87,8 +87,17 @@ public class Helicopter : MonoBehaviour
         }
         if (MoveCount == MaxCount-1)
         {
+            Debug.Log("Change");
             VerticalHeight = autoStage.rightTop.y;
             height = autoStage.rightTop.y;
+            if (cos >= 0.9f)
+            {
+                if (CountCheck)
+                {
+                    ++MoveCount;
+                    CountCheck = false;
+                }
+            }
         }
         if (MoveCount == MaxCount)
         {
@@ -103,6 +112,19 @@ public class Helicopter : MonoBehaviour
         //水平移動
         if (VerticalMove)
         {
+            if (cos >= 0.9f)
+            {
+                if (CountCheck)
+                {
+                    CountCheck = false;
+                    ++MoveCount;
+                }
+            }
+            else
+            {
+                CountCheck = true;
+            }
+
             transform.position = new Vector3(cos * (autoStage.rightTop.x+1.0f)*2, autoStage.rightTop.y-2.5f, 0);
 
             if (transform.position.x >= autoStage.leftBottom.x && transform.position.x <= autoStage.rightTop.x)
@@ -119,23 +141,23 @@ public class Helicopter : MonoBehaviour
         //垂直移動
         if (HorizontalMove)
         {
+            if (cos <= -0.9f)
+            {
+                if (CountCheck)
+                {
+                    CountCheck = false;
+                    ++MoveCount;
+                }
+            }
+            else
+            {
+                CountCheck = true;
+            }
             transform.position = new Vector3(VerticalWidth, cos * VerticalHeight + height,0);
         }
 
-
         //cosの値で出現のタイミングを調整
-        if (cos <= -0.9f || cos >= 0.9f)
-        {
-            if (CountCheck)
-            {
-                CountCheck = false;
-                ++MoveCount;
-            }
-        }
-        else
-        {
-            CountCheck = true;
-        }
+        
 
 
         //回転

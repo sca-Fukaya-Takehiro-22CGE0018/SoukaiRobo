@@ -169,15 +169,18 @@ public class AutoStage : MonoBehaviour
         }
 
         //敵出現の調整
-        if (EnemyCount == 2)
+        if (isNormalStage)
         {
-            if (beforeHeight <= Height)
+            if (EnemyCount == 2)
             {
-                enemySpawn.SpawnEnemy();
-                EnemyCount = 0;
+                if (beforeHeight <= Height)
+                {
+                    enemySpawn.SpawnEnemy();
+                    EnemyCount = 0;
+                }
             }
+            ++EnemyCount;
         }
-        ++EnemyCount;
 
         A_Height = Height;
         isHallMade = false;//地面ができた
@@ -279,6 +282,7 @@ public class AutoStage : MonoBehaviour
     //ヘリ出現
     private void HelicopterSpawn()
     {
+        Debug.Log("ヘリ出現");
         Instantiate(Helicopter, new Vector3(SpawnPositionX, rightTop.y-2.5f,0),Quaternion.identity);
     }
     IEnumerator Wait()
