@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class TracEnemy : MonoBehaviour
 {
+    [SerializeField]
+    GameObject Anim;
+
     public float hp = 0;//体力
     private GameObject playerObject;
     private Vector3 PlayerPosition;
@@ -12,7 +15,7 @@ public class TracEnemy : MonoBehaviour
     private PlayerControll playerControll;
     private PanelManager panelManager;
     private GameManager gameManager;
-    private Animator anim = null;
+    private Animator anim;
 
     [SerializeField] private GameObject Heart;
     // Start is called before the first frame update
@@ -59,6 +62,8 @@ public class TracEnemy : MonoBehaviour
         }
         if (hp <= 0)
         {
+            Instantiate(Anim, transform.position, Quaternion.identity);
+
             gameManager.EnemyDefeat++;
             //確率でアイテムドロップ
             int random = Random.Range(0, 2);
