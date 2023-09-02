@@ -16,6 +16,7 @@ public class TankMove : MonoBehaviour
     [SerializeField]
     GameObject StrongBulletAnim;
 
+    private float Speed = -2.0f;
     private float speed;//戦車が出てくるときのスピード
     [SerializeField] private float Hp = 100;//戦車のHP
     private float CannonballTimer;//砲弾発射までの時間
@@ -24,6 +25,7 @@ public class TankMove : MonoBehaviour
     private float MissileCoolTime = 5.0f;//ミサイル発射のクールタイム
 
     private bool onStage = false;
+    private Vector3 position;
 
     private PlayerControll playerControll;
     private AutoStage autoStage;
@@ -32,25 +34,35 @@ public class TankMove : MonoBehaviour
     void Start()
     {
         playerControll = FindObjectOfType<PlayerControll>();
-        speed = -2.0f;
+        speed = Speed;
         CannonballTimer = CannonCoolTime;
         MissileTimer = MissileCoolTime;
         autoStage = FindObjectOfType<AutoStage>();
         anim = GetComponent<Animator>();
+        Vector3 position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         //画面外から戦車が出てくる
-        transform.position += new Vector3(speed,0,0)*Time.deltaTime;
+        if (!onStage)
+        {
+            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+        }
+        else
+        {
+            speed = 0.0f;
+            if (transform.position.x >= autoStage.rightTop.x)
+            {
+                onStage = false;
+                speed = Speed;
+            }
+        }
+
         if (transform.position.x <= autoStage.rightTop.x-2.0f)
         {
             onStage = true;
-        }
-        if (onStage)
-        {
-            speed = 0.0f;
         }
 
         //CannonballTimerが0になったら砲弾発射

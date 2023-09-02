@@ -22,8 +22,10 @@ public class EnemyControll : MonoBehaviour
     private GameObject player;
     public float hp = 1;//ëÃóÕ
     public float EnemyBulletPower = 1;//É_ÉÅÅ[ÉWó 
+    private bool canAttack = true;//çUåÇÇ≈Ç´ÇÈÇ©
     private PlayerControll playerControll;
     private GameManager gameManager;
+    private AutoStage autoStage;
     private Animator anim;
     public float Delay
     {
@@ -40,6 +42,7 @@ public class EnemyControll : MonoBehaviour
     {
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.gameManager = FindObjectOfType<GameManager>();
+        autoStage = FindObjectOfType<AutoStage>();
         InvokeRepeating("SpawnBulletBurst", delay, delay);
     }
 
@@ -47,6 +50,19 @@ public class EnemyControll : MonoBehaviour
     void Update()
     {
         transform.position -= new Vector3(2.0f,0,0)*Time.deltaTime;
+        if (this.transform.position.x <= player.transform.position.x)
+        {
+            if (canAttack)
+            {
+                Turn();
+                canAttack = false;
+            }
+            burstCount = 0;
+        }
+        if (autoStage.leftBottom.x >= this.transform.position.x)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SpawnBulletBurst()
@@ -74,6 +90,10 @@ public class EnemyControll : MonoBehaviour
             }
             yield return new WaitForSeconds(burstInterval);
         }
+    }
+    private void Turn()
+    {
+        transform.Rotate(0, 180, 0);
     }
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
