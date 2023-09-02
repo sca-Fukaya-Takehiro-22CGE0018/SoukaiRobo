@@ -14,6 +14,12 @@ public class CannonballMove : MonoBehaviour
 
     private float speed = 10.0f;
     private float timer = 2.5f;
+
+    [SerializeField]
+    GameObject Anim;
+    [SerializeField]
+    GameObject PlayerHitAnim;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +29,7 @@ public class CannonballMove : MonoBehaviour
         CannonballRigidbody = Cannonball.GetComponent<Rigidbody2D>();
         pPos = playerObject.transform.position;
         cPos = Cannonball.transform.position;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,16 +50,19 @@ public class CannonballMove : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             lifeManager.HideHeart();
+            Instantiate(PlayerHitAnim, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
             Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "Bullet1")
         {
             Destroy(other.gameObject);
+            Instantiate(Anim, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "Bullet2")
         {
             Destroy(this.gameObject);
+            Instantiate(Anim, transform.position, Quaternion.identity);
         }
     }
 }

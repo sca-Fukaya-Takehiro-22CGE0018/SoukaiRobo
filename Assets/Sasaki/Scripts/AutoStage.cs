@@ -171,15 +171,10 @@ public class AutoStage : MonoBehaviour
         //敵出現の調整
         if (isNormalStage)
         {
-            if (EnemyCount == 2)
+            if (beforeHeight <= Height)
             {
-                if (beforeHeight <= Height)
-                {
-                    enemySpawn.SpawnEnemy();
-                    EnemyCount = 0;
-                }
+                enemySpawn.SpawnEnemy();
             }
-            ++EnemyCount;
         }
 
         A_Height = Height;
@@ -249,7 +244,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(SpawnPositionX+2.0f, rightTop.y-2.5f, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(SpawnPositionX+2.0f, rightTop.y-2.0f, 0), Quaternion.identity);
     }
 
     //壁戦

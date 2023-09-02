@@ -490,12 +490,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
-  Tank: {fileID: 6489802308476180291, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
-  Helicopter: {fileID: 190032256588879222, guid: 7bf566942b6bf7949b3afe9eb80c647f,
+  Tank: {fileID: 9027046850419910434, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
+  Helicopter: {fileID: 7756885597599216264, guid: 7bf566942b6bf7949b3afe9eb80c647f,
     type: 3}
   SpawnPositionX: 0
   Height: 0
-  isNormalStage: 1
+  isNormalStage: 0
   isTankBossBattle: 0
   isWallBossBattle: 0
   isHelicopterBossBattle: 0
@@ -2476,6 +2476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6c05e0c6078a44cb784b29ab94d8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxEnemy: 20
   image: {fileID: 0}
   panel: {fileID: 1373095280}
 --- !u!4 &5315110251088089048
@@ -2611,9 +2612,9 @@ MonoBehaviour:
     type: 3}
   EnemyBulletPoint: {fileID: 8654061920533580778}
   bulletSpeed: 10
-  delay: 2
+  delay: 3
   burstCount: 3
-  burstInterval: 0.5
+  burstInterval: 0.3
   Anim: {fileID: 1788954258549756650, guid: 337f031498180e847822432cdcad7f9d, type: 3}
   hp: 1
   EnemyBulletPower: 1

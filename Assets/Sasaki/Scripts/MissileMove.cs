@@ -13,6 +13,12 @@ public class MissileMove : MonoBehaviour
 
     private LifeManager lifeManager;
 
+    [SerializeField]
+    GameObject Anim;
+    [SerializeField]
+    GameObject PlayerHitAnim;
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +27,7 @@ public class MissileMove : MonoBehaviour
         lifeManager = FindObjectOfType<LifeManager>();
         transform.localScale = new Vector3(0.04f,0.04f,1.0f);
         StartCoroutine(ScaleChange());
+        anim = GetComponent<Animator>();
     }
 
     private IEnumerator ScaleChange()
@@ -53,16 +60,19 @@ public class MissileMove : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+            Instantiate(PlayerHitAnim, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
             lifeManager.HideHeart();
         }
         if (other.gameObject.tag == "Bullet1")
         {
             Destroy(other.gameObject);
+            Instantiate(Anim, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
         if (other.gameObject.tag == "Bullet2")
         {
             Destroy(this.gameObject);
+            Instantiate(Anim, transform.position, Quaternion.identity);
         }
     }
 }

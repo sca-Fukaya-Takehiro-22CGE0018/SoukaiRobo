@@ -133,4 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7c75eed632e4b4aad3b19763a8e105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Battery: {fileID: 8843565704305861461, guid: 85ab2498005f85242ac2194031bf2780, type: 3}
+  Anim: {fileID: 1737877660703667764, guid: 26a0cf567b5884645a25219889e4bc27, type: 3}
+  PlayerHitAnim: {fileID: 6078986363207270423, guid: f8b5d6b786dcd6749a4bdf906befac69,
+    type: 3}

@@ -7,6 +7,8 @@ public class Helicopter : MonoBehaviour
 {
     [SerializeField]
     GameObject Anim;
+    [SerializeField]
+    GameObject BulletAnim;
     //ˆÚ“®ŠÖŒW
     private float cos;
     private float HorizontalWidth = 16.0f;//‰¡ˆÚ“®‚Ì•
@@ -129,7 +131,7 @@ public class Helicopter : MonoBehaviour
                 CountCheck = true;
             }
 
-            transform.position = new Vector3(cos * (autoStage.rightTop.x+1.0f)*2, autoStage.rightTop.y-2.5f, 0);
+            transform.position = new Vector3(cos * (autoStage.rightTop.x+1.0f)*2, autoStage.rightTop.y-0.5f, 0);
 
             if (transform.position.x >= autoStage.leftBottom.x && transform.position.x <= autoStage.rightTop.x)
             {
@@ -225,6 +227,7 @@ public class Helicopter : MonoBehaviour
         if (collider2D.gameObject.tag == "Bullet1")
         {
             Destroy(collider2D.gameObject);
+            Instantiate(BulletAnim, collider2D.gameObject.transform.position, Quaternion.identity);
             Hp = Hp -= playerControll.Bullet1Power;
         }
         if (collider2D.gameObject.tag == "Bullet2")

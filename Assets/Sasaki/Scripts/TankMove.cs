@@ -11,6 +11,10 @@ public class TankMove : MonoBehaviour
     private GameObject Missile;//ミサイル
     [SerializeField]
     GameObject Anim;
+    [SerializeField]
+    GameObject BulletAnim;
+    [SerializeField]
+    GameObject StrongBulletAnim;
 
     private float speed;//戦車が出てくるときのスピード
     [SerializeField] private float Hp = 100;//戦車のHP
@@ -89,10 +93,12 @@ public class TankMove : MonoBehaviour
         if (collider2D.gameObject.tag == "Bullet1")
         {
             Destroy(collider2D.gameObject);
+            Instantiate(BulletAnim, collider2D.gameObject.transform.position, Quaternion.identity);
             Hp = Hp -= playerControll.Bullet1Power;
         }
         if (collider2D.gameObject.tag == "Bullet2")
         {
+            Instantiate(StrongBulletAnim, collider2D.gameObject.transform.position, Quaternion.identity);
             Hp = Hp -= playerControll.Bullet2Power;
         }
         if (Hp <= -0)
