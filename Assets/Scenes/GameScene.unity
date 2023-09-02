@@ -2614,8 +2614,8 @@ MonoBehaviour:
   delay: 2
   burstCount: 3
   burstInterval: 0.5
-  Anim: {fileID: 4580097507333643087, guid: dc0b5dd65ce322644a63e34cf6221e43, type: 3}
-  hp: 3
+  Anim: {fileID: 1788954258549756650, guid: 337f031498180e847822432cdcad7f9d, type: 3}
+  hp: 1
   EnemyBulletPower: 1
 --- !u!1 &8654061920148672476
 GameObject:

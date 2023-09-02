@@ -8,7 +8,7 @@ public class TracEnemy : MonoBehaviour
     [SerializeField]
     GameObject Anim;
 
-    public float hp = 0;//体力
+    public float hp = 1;//体力
     private GameObject playerObject;
     private Vector3 PlayerPosition;
     private Vector3 EnemyPosition;

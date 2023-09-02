@@ -20,7 +20,7 @@ public class EnemyControll : MonoBehaviour
     GameObject Anim;
 
     private GameObject player;
-    public float hp = 0;//‘Ì—Í
+    public float hp = 1;//‘Ì—Í
     public float EnemyBulletPower = 1;//ƒ_ƒ[ƒW—Ê
     private PlayerControll playerControll;
     private GameManager gameManager;
