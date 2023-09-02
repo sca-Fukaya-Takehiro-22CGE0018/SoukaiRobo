@@ -11,7 +11,7 @@ public class EnemyControll : MonoBehaviour
     [SerializeField]//弾のスピード
     float bulletSpeed;
     [SerializeField]//射撃間隔
-     float delay = 4.0f;
+     float delay = 2.5f;
     [SerializeField]//連射間隔
     int burstCount = 3;
     [SerializeField]//連射の間隔

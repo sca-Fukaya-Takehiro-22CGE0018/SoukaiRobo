@@ -233,7 +233,6 @@ public class AutoStage : MonoBehaviour
     //戦車戦
     public void TankBattle()
     {
-        Debug.Log("TankBattle");
         offScreenAttack.SwitchCount();
         isTankBossBattle = true;
         isNormalStage =false;
@@ -244,7 +243,7 @@ public class AutoStage : MonoBehaviour
     //戦車出現
     private void TankSpawn()
     {
-        Instantiate(Tank, new Vector3(SpawnPositionX+2.0f, rightTop.y-2.0f, 0), Quaternion.identity);
+        Instantiate(Tank, new Vector3(SpawnPositionX+1.2f, rightTop.y-3.0f, 0), Quaternion.identity);
     }
 
     //壁戦

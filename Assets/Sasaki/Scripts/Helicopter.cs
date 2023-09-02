@@ -43,6 +43,7 @@ public class Helicopter : MonoBehaviour
     private int AttackCount = 4;
     private bool AttackCheck = true;
 
+    private Collider2D co2D;
     private PlayerControll playerControll;
     private AutoStage autoStage;
     private Animator anim;
@@ -56,6 +57,7 @@ public class Helicopter : MonoBehaviour
         playerControll = FindObjectOfType<PlayerControll>();
         autoStage = FindObjectOfType<AutoStage>();
         anim = GetComponent<Animator>();
+        co2D = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -74,6 +76,7 @@ public class Helicopter : MonoBehaviour
         {
             VerticalMove = false;
             HorizontalMove = true;
+            co2D.isTrigger = false;
             VerticalHeight = autoStage.rightTop.y;
             height = autoStage.rightTop.y;
             transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
@@ -110,6 +113,7 @@ public class Helicopter : MonoBehaviour
             MoveCount = 0;
             VerticalMove = true;
             HorizontalMove = false;
+            co2D.isTrigger = true;
             AttackCheck = true;
             transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
@@ -222,6 +226,12 @@ public class Helicopter : MonoBehaviour
         }
     }
 
+    IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("ResultScene");
+    }
+
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         if (collider2D.gameObject.tag == "Bullet1")
@@ -238,7 +248,7 @@ public class Helicopter : MonoBehaviour
         {
             Instantiate(Anim,transform.position,Quaternion.identity);
             Destroy(this.gameObject);
-            SceneManager.LoadScene("ResultScene");
+            StartCoroutine(ChangeScene());
         }
     }
 }

@@ -37,9 +37,12 @@ public class Player : MonoBehaviour
     private float jumpTime = 0.0f;//ジャンプ時間
     private float dashTime;
     private float beforeKey;
+    private float AttackInterval = 0.3f;
+    private float AttackCoolTime;
     private bool isGround = false;
     private bool isJump = false;//ジャンプ判定
     private bool isShootingEnabled = true; // CT用
+    private bool AutoAttack = true;
     private Vector2 velocity;
     private Vector3 bulletPoint; // 弾の発射地点
     private float lifeTimer = 1.0f; //画面外の時の〇秒ごとにHPが減る
@@ -64,7 +67,7 @@ public class Player : MonoBehaviour
         panelManager = FindObjectOfType<PanelManager>();
         autoStage = FindObjectOfType<AutoStage>();
         rb = GetComponent<Rigidbody2D>();
-
+        AttackCoolTime = AttackInterval;
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -134,7 +137,16 @@ public class Player : MonoBehaviour
         */
 
         // 弾発射処理
-        if (Input.GetMouseButtonDown(0) /*&& panelManager.panelFlag == false*/)
+        if (Input.GetMouseButton(0) && AutoAttack)
+        {
+            AttackCoolTime -= Time.deltaTime;
+            if (AttackCoolTime <= 0.0f)
+            {
+                Fire1();
+                AttackCoolTime = AttackInterval;
+            }
+        }
+        else if (Input.GetMouseButtonDown(0) && !AutoAttack)
         {
             Fire1();
         }
@@ -142,6 +154,17 @@ public class Player : MonoBehaviour
         {
             Instantiate(bulletPrefab2, transform.position + bulletPoint, Quaternion.identity);
             StartCoroutine(EnableShooting());
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (AutoAttack)
+            {
+                AutoAttack =false;
+            }
+            else
+            {
+                AutoAttack = true;
+            }
         }
 
         //落下判定
@@ -164,6 +187,7 @@ public class Player : MonoBehaviour
         {
             lifeTimer = 1.0f;
         }
+
     }
 
     void Fire1()
