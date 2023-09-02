@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 148417404}
   - component: {fileID: 148417403}
   - component: {fileID: 148417402}
+  - component: {fileID: 148417405}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +205,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &148417405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148417401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cdbb4a0f627b64c805eb3ba9a923be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &216151505
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube: {fileID: 8781136584388419538, guid: 2e159697df0e2d84f9e4263c5f559ee8, type: 3}
   Aerial: {fileID: 2313708946490264416, guid: b50c1a3745215894f8de066bc172feff, type: 3}
-  Tank: {fileID: 9027046850419910434, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
+  Tank: {fileID: 6802269599152404516, guid: 10028eee47a8e5e428fb8fa09f000129, type: 3}
   Helicopter: {fileID: 7756885597599216264, guid: 7bf566942b6bf7949b3afe9eb80c647f,
     type: 3}
   SpawnPositionX: 0
@@ -609,6 +622,7 @@ MonoBehaviour:
   - {fileID: 1880428771}
   - {fileID: 1348123144}
   Heart: {fileID: 1348123144}
+  shake: {fileID: 148417405}
 --- !u!4 &579625277
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,8 +1246,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 5876445949654838218, guid: c5959794d435db84ca65b98b9636840b, type: 3}
-  pos: {fileID: 1037385277}
-  pos2: {fileID: 1037385277}
 --- !u!4 &1037385277
 Transform:
   m_ObjectHideFlags: 0
@@ -2615,7 +2627,7 @@ MonoBehaviour:
   delay: 3
   burstCount: 3
   burstInterval: 0.3
-  Anim: {fileID: 1788954258549756650, guid: 337f031498180e847822432cdcad7f9d, type: 3}
+  Anim: {fileID: 2505371203994457535, guid: 81233e422fcaf2d4681911b26f884fbc, type: 3}
   hp: 1
   EnemyBulletPower: 1
 --- !u!1 &8654061920148672476

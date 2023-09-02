@@ -7,6 +7,7 @@ public class LifeManager : MonoBehaviour
 {
     public List<GameObject> heartObjects; // ハートオブジェクトのリスト
     [SerializeField] GameObject Heart;
+    public CameraShake shake;
 
     // ハートの非表示処理
     public void HideHeart()
@@ -16,6 +17,7 @@ public class LifeManager : MonoBehaviour
         {
             if (heart.activeSelf)
             {
+                shake.Shake(0.2f,0.2f);
                 heart.SetActive(false);
                 CheckLife();
                 break;
