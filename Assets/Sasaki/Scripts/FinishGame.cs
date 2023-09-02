@@ -20,8 +20,11 @@ public class FinishGame : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
         }
     }
 }
