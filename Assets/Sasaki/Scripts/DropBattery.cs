@@ -16,6 +16,7 @@ public class DropBattery : MonoBehaviour
     private bool onStage = false;
 
     private LifeManager lifeManager;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class DropBattery : MonoBehaviour
         difX = this.transform.position.x;//アイテムの最初のx座標
         difY = this.transform.position.y;
         lifeManager = FindObjectOfType<LifeManager>();
-
+        gameManager = FindObjectOfType<GameManager>();
         Debug.Log(pos.y);
     }
 
@@ -52,6 +53,7 @@ public class DropBattery : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
+            gameManager.ItemBonus += 100;
             lifeManager.HeartRecovery();
         }
     }

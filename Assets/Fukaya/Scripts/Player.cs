@@ -98,44 +98,6 @@ public class Player : MonoBehaviour
         float ySpeed = -gravity;
         float verticalKey = Input.GetAxis("Vertical");
 
-        //仮のジャンプ処理のため
-        /*
-        if (isGround)
-        {
-            if (verticalKey > 0)
-            {
-                ySpeed = jumpSpeed;
-                jumpPos = transform.position.y; //ジャンプした位置を記録する
-                isJump = true;
-                jumpTime = 0.0f;
-            }
-            else
-            {
-                isJump = false;
-            }
-        }
-        else if (isJump)
-        {
-            //上方向キーを押しているか
-            bool pushUpKey = verticalKey > 0;
-            //現在の高さが飛べる高さより下か
-            bool canHeight = jumpPos + jumpHeight > transform.position.y;
-            //ジャンプ時間が長くなりすぎてないか
-            bool canTime = jumpLimitTime > jumpTime;
-
-            if (pushUpKey && canHeight && canTime)
-            {
-                ySpeed = jumpSpeed;
-                jumpTime += Time.deltaTime;
-            }
-            else
-            {
-                isJump = false;
-                jumpTime = 0.0f;
-            }
-        }
-        */
-
         // 弾発射処理
         if (Input.GetMouseButton(0) && AutoAttack)
         {
@@ -210,11 +172,6 @@ public class Player : MonoBehaviour
         {
             lifeManager.HideHeart();
         }
-        //if(collider2D.gameObject.tag == "Heart")
-        //{
-        //    Debug.Log("触れた");
-        //    lifeManager.HeartRecovery();
-        //}
     }
 
     //仮のジャンプ処理のため追加//////

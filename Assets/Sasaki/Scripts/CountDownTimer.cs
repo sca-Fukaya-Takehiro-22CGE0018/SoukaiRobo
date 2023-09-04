@@ -9,9 +9,10 @@ public class CountDownTimer : MonoBehaviour
 	private float CountDownSeconds;
 
 	public Text timeText;
-
+	private GameManager gameManager;
 	void Start()
 	{
+		gameManager = FindObjectOfType<GameManager>();
 		timeText = GetComponent<Text>();
 		CountDownMinutes = 3;
 		CountDownSeconds = CountDownMinutes * 60;
