@@ -10,6 +10,16 @@ public class GameManager : MonoBehaviour
     int defeat = 0;//撃破数
     [SerializeField]
     int maxEnemy = 20;//最大撃破数
+    [SerializeField,Header("敵撃破スコア")]
+    int defeatScore = 0;
+    [SerializeField,Header("ボス撃破スコア")]
+    int bossScore = 0;
+    [SerializeField,Header("タイムボーナス")]
+    int timeBonus = 0;
+    [SerializeField, Header("アイテムボーナス")]
+    int itemBonus = 0;
+    [SerializeField, Header("トータル")]
+    int total = 0;
     [SerializeField] Image image = null;
     [SerializeField] GameObject panel = null;
     private int Wave = 0;
@@ -41,6 +51,36 @@ public class GameManager : MonoBehaviour
         get { return maxEnemy; }
         set { maxEnemy = value; }
     }
+
+    public int DefeatScore
+    {
+        get { return defeatScore;}
+        set { defeatScore = value;}
+    }
+
+    public int BossScore
+    {
+        get { return bossScore;}
+        set { bossScore = value;}
+    }
+
+    public int TimeBonus
+    {
+        get { return timeBonus;}
+        set { timeBonus = value;}
+    }
+
+    public int ItemBonus
+    {
+        get { return itemBonus;}
+        set { itemBonus = value;}
+    }
+
+    public int Total
+    {
+        get { return total;}
+        set { total = value;}
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +108,8 @@ public class GameManager : MonoBehaviour
         {
             justOnce = true;
         }
+
+        total = (defeatScore + bossScore + itemBonus + timeBonus);
     }
 
     public void Load()

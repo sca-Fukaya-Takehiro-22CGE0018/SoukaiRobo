@@ -30,6 +30,7 @@ public class TankMove : MonoBehaviour
     private PlayerControll playerControll;
     private AutoStage autoStage;
     private Animator anim;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class TankMove : MonoBehaviour
         MissileTimer = MissileCoolTime;
         autoStage = FindObjectOfType<AutoStage>();
         anim = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
         Vector3 position = transform.position;
     }
 
@@ -115,6 +117,7 @@ public class TankMove : MonoBehaviour
         }
         if (Hp <= -0)
         {
+            gameManager.BossScore += 2000;
             Instantiate(Anim,transform.position,Quaternion.identity);
             Destroy(this.gameObject);
             autoStage.NormalStage();

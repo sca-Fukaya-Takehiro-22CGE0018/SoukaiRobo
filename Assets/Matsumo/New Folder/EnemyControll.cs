@@ -114,7 +114,7 @@ public class EnemyControll : MonoBehaviour
             Instantiate(Anim, transform.position, Quaternion.identity);
             gameManager.EnemyDefeat += 1;
             Destroy(this.gameObject);
-            
+            gameManager.DefeatScore += 200;
         }
     }
 }

@@ -47,6 +47,7 @@ public class Helicopter : MonoBehaviour
     private PlayerControll playerControll;
     private AutoStage autoStage;
     private Animator anim;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class Helicopter : MonoBehaviour
         autoStage = FindObjectOfType<AutoStage>();
         anim = GetComponent<Animator>();
         co2D = GetComponent<Collider2D>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -246,6 +248,7 @@ public class Helicopter : MonoBehaviour
         }
         if (Hp <= -0)
         {
+            gameManager.BossScore += 2000;
             Instantiate(Anim,transform.position,Quaternion.identity);
             Destroy(this.gameObject);
             StartCoroutine(ChangeScene());
