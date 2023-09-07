@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AutoStage : MonoBehaviour
 {
@@ -46,10 +47,11 @@ public class AutoStage : MonoBehaviour
         offScreenAttack = FindObjectOfType<OffScreenAttack>();
         rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,0));
         leftBottom = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        Debug.Log(rightTop.y);
         high = leftBottom.y+1.0f;
         low = leftBottom.y-2.0f;
         Height = low; //最初の高さ
-        SpawnPositionX = rightTop.x + 5.0f;
+        SpawnPositionX = rightTop.x + 7.0f;
     }
 
     void Update()
@@ -114,7 +116,6 @@ public class AutoStage : MonoBehaviour
             //4回連続で作られなかったら必ず空中床を生成
             if (AerialfloorMadeCount >= 4)
             {
-                Debug.Log("空中床を生成");
                 AerialFloorGenerate();
                 timer = 4.0f;
                 return;
@@ -123,7 +124,6 @@ public class AutoStage : MonoBehaviour
             //1/2の確立で空中床を生成する
             if(A_random == 0)
             {
-                Debug.Log("空中床を生成");
                 AerialFloorGenerate();
                 timer = 4.0f;
                 return;
@@ -276,9 +276,14 @@ public class AutoStage : MonoBehaviour
     //ヘリ出現
     private void HelicopterSpawn()
     {
-        Debug.Log("ヘリ出現");
         Instantiate(Helicopter, new Vector3(SpawnPositionX, rightTop.y-2.5f,0),Quaternion.identity);
     }
+
+    public void GameClear()
+    {
+        StartCoroutine(ChangeScene());
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(5f);
@@ -294,5 +299,11 @@ public class AutoStage : MonoBehaviour
         {
             HelicopterSpawn();
         }
+    }
+
+    IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("ResultScene");
     }
 }

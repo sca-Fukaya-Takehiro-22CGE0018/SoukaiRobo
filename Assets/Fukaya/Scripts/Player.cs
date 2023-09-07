@@ -37,7 +37,8 @@ public class Player : MonoBehaviour
     private float jumpTime = 0.0f;//ジャンプ時間
     private float dashTime;
     private float beforeKey;
-    private float AttackInterval = 0.3f;
+    //private float AttackInterval = 0.3f;
+    private float AttackInterval = 0.05f;
     private float AttackCoolTime;
     private bool isGround = false;
     private bool isJump = false;//ジャンプ判定

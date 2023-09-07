@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Helicopter : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public class Helicopter : MonoBehaviour
     GameObject BulletAnim;
     //移動関係
     private float cos;
-    private float HorizontalWidth = 16.0f;//横移動の幅
-    private float HorizontalHeight = 3.5f;//横移動の時の高さ
     private float VerticalWidth = 6.0f;//垂直移動のX座標
     private float VerticalHeight = 2.0f;//垂直移動の高さ(幅)
     private float height = 1.0f;//垂直移動の高さ調整
@@ -22,8 +19,8 @@ public class Helicopter : MonoBehaviour
     private int ChangeCount = 2;//移動の向き変更
     private int MaxCount = 6;
     private bool lotateCheck = false;//回転するかの確認
-    private bool VerticalMove = false;
-    private bool HorizontalMove = false;
+    private bool VerticalMove = false;//垂直移動
+    private bool HorizontalMove = false;//水平移動
     private bool CountCheck = false;
 
     //攻撃関係
@@ -47,17 +44,18 @@ public class Helicopter : MonoBehaviour
     private PlayerControll playerControll;
     private AutoStage autoStage;
     private Animator anim;
+    private Vector3 AnimPosition;
     // Start is called before the first frame update
     void Start()
     {
+        co2D = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        VerticalMove = false;
-        HorizontalMove = true;
+        VerticalMove = true;
+        HorizontalMove = false;
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
         playerControll = FindObjectOfType<PlayerControll>();
         autoStage = FindObjectOfType<AutoStage>();
         anim = GetComponent<Animator>();
-        co2D = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -65,17 +63,11 @@ public class Helicopter : MonoBehaviour
     {
         cos = Mathf.Cos(Time.time * speed);
 
-        //HPが0になったらplayerに突撃
-        if (Hp <= 0.0f)
-        {
-            return;
-        }
-
         //Countでヘリコプターの移動を変えている
         if (MoveCount == ChangeCount)
         {
-            VerticalMove = false;
-            HorizontalMove = true;
+            VerticalMove = true;
+            HorizontalMove = false;
             co2D.isTrigger = false;
             VerticalHeight = autoStage.rightTop.y;
             height = autoStage.rightTop.y;
@@ -111,8 +103,8 @@ public class Helicopter : MonoBehaviour
         if (MoveCount == MaxCount)
         {
             MoveCount = 0;
-            VerticalMove = true;
-            HorizontalMove = false;
+            VerticalMove = false;
+            HorizontalMove = true;
             co2D.isTrigger = true;
             AttackCheck = true;
             transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
@@ -120,7 +112,7 @@ public class Helicopter : MonoBehaviour
 
 
         //水平移動
-        if (VerticalMove)
+        if (HorizontalMove)
         {
             if (cos >= 0.9f)
             {
@@ -149,7 +141,7 @@ public class Helicopter : MonoBehaviour
         }
 
         //垂直移動
-        if (HorizontalMove)
+        if (VerticalMove)
         {
             if (cos <= -0.9f)
             {
@@ -226,11 +218,6 @@ public class Helicopter : MonoBehaviour
         }
     }
 
-    IEnumerator ChangeScene()
-    {
-        yield return new WaitForSeconds(1.0f);
-        SceneManager.LoadScene("ResultScene");
-    }
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
@@ -246,9 +233,10 @@ public class Helicopter : MonoBehaviour
         }
         if (Hp <= -0)
         {
-            Instantiate(Anim,transform.position,Quaternion.identity);
+            autoStage.GameClear();
+            AnimPosition = new Vector3(transform.position.x-1.0f, transform.position.y + 1.0f, 0);
+            Instantiate(Anim, AnimPosition, Quaternion.identity);
             Destroy(this.gameObject);
-            StartCoroutine(ChangeScene());
         }
     }
 }
