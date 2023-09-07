@@ -29,6 +29,7 @@ public class TankMove : MonoBehaviour
 
     private PlayerControll playerControll;
     private AutoStage autoStage;
+    private ScoreManager scoreManager;
     private Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,7 @@ public class TankMove : MonoBehaviour
         CannonballTimer = CannonCoolTime;
         MissileTimer = MissileCoolTime;
         autoStage = FindObjectOfType<AutoStage>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         anim = GetComponent<Animator>();
         Vector3 position = transform.position;
     }
@@ -85,7 +87,6 @@ public class TankMove : MonoBehaviour
     //砲撃
     void Bombardment()
     {
-        Debug.Log("砲弾発射");
         Instantiate(Cannonball,
             new Vector3(transform.position.x-4.5f, transform.position.y+0.6f, transform.position.z),
             Quaternion.identity);
@@ -94,7 +95,6 @@ public class TankMove : MonoBehaviour
     //ミサイル攻撃
     void MissileAttack()
     {
-        Debug.Log("ミサイル発射");
         Instantiate(Missile,
             new Vector3(transform.position.x, transform.position.y+2.7f, transform.position.z),
             Quaternion.identity);
@@ -116,6 +116,7 @@ public class TankMove : MonoBehaviour
         if (Hp <= -0)
         {
             Instantiate(Anim,transform.position,Quaternion.identity);
+            scoreManager.BossScoreAdd();
             Destroy(this.gameObject);
             autoStage.NormalStage();
         }

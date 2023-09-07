@@ -36,6 +36,7 @@ public class AutoStage : MonoBehaviour
 
     private EnemySpawn enemySpawn;
     private OffScreenAttack offScreenAttack;
+    private CountDownTimer countDownTimer;
 
     public Vector3 rightTop;
     public Vector3 leftBottom;
@@ -45,9 +46,9 @@ public class AutoStage : MonoBehaviour
         A_Height = low;
         enemySpawn = FindObjectOfType<EnemySpawn>();
         offScreenAttack = FindObjectOfType<OffScreenAttack>();
+        countDownTimer = FindObjectOfType<CountDownTimer>();
         rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height,0));
         leftBottom = Camera.main.ScreenToWorldPoint(Vector3.zero);
-        Debug.Log(rightTop.y);
         high = leftBottom.y+1.0f;
         low = leftBottom.y-2.0f;
         Height = low; //最初の高さ
@@ -281,6 +282,7 @@ public class AutoStage : MonoBehaviour
 
     public void GameClear()
     {
+        countDownTimer.StopTimer();
         StartCoroutine(ChangeScene());
     }
 

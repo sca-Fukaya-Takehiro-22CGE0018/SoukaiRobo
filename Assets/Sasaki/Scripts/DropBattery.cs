@@ -24,8 +24,6 @@ public class DropBattery : MonoBehaviour
         difX = this.transform.position.x;//アイテムの最初のx座標
         difY = this.transform.position.y;
         lifeManager = FindObjectOfType<LifeManager>();
-
-        Debug.Log(pos.y);
     }
 
     // Update is called once per frame

@@ -43,6 +43,7 @@ public class Helicopter : MonoBehaviour
     private Collider2D co2D;
     private PlayerControll playerControll;
     private AutoStage autoStage;
+    private ScoreManager scoreManager;
     private Animator anim;
     private Vector3 AnimPosition;
     // Start is called before the first frame update
@@ -55,6 +56,7 @@ public class Helicopter : MonoBehaviour
         BombTimer = Random.Range(MinBombTime,MaxBombTime);
         playerControll = FindObjectOfType<PlayerControll>();
         autoStage = FindObjectOfType<AutoStage>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         anim = GetComponent<Animator>();
     }
 
@@ -88,7 +90,6 @@ public class Helicopter : MonoBehaviour
         }
         if (MoveCount == MaxCount-1)
         {
-            Debug.Log("Change");
             VerticalHeight = autoStage.rightTop.y;
             height = autoStage.rightTop.y;
             if (cos >= 0.9f)
@@ -233,6 +234,7 @@ public class Helicopter : MonoBehaviour
         }
         if (Hp <= -0)
         {
+            scoreManager.BossScoreAdd();
             autoStage.GameClear();
             AnimPosition = new Vector3(transform.position.x-1.0f, transform.position.y + 1.0f, 0);
             Instantiate(Anim, AnimPosition, Quaternion.identity);

@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
     {
         if (defeat == maxEnemy)
         {
-            Debug.Log("ゲージがたまった");
             defeat = 0;
             if (Wave == 0)
             {

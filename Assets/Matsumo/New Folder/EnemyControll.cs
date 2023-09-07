@@ -26,6 +26,7 @@ public class EnemyControll : MonoBehaviour
     private PlayerControll playerControll;
     private GameManager gameManager;
     private AutoStage autoStage;
+    private ScoreManager scoreManager;
     private Animator anim;
     public float Delay
     {
@@ -43,6 +44,7 @@ public class EnemyControll : MonoBehaviour
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.gameManager = FindObjectOfType<GameManager>();
         autoStage = FindObjectOfType<AutoStage>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         InvokeRepeating("SpawnBulletBurst", delay, delay);
     }
 
@@ -112,9 +114,9 @@ public class EnemyControll : MonoBehaviour
         if (hp <= 0)
         {
             Instantiate(Anim, transform.position, Quaternion.identity);
+            scoreManager.EnemyScoreAdd();
             gameManager.EnemyDefeat += 1;
             Destroy(this.gameObject);
-            
         }
     }
 }

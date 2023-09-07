@@ -15,6 +15,7 @@ public class TracEnemy : MonoBehaviour
     private PlayerControll playerControll;
     private PanelManager panelManager;
     private GameManager gameManager;
+    private ScoreManager scoreManager;
     private Animator anim;
 
     [SerializeField] private GameObject Heart;
@@ -24,6 +25,7 @@ public class TracEnemy : MonoBehaviour
         this.playerControll = FindObjectOfType<PlayerControll>();
         this.panelManager = FindObjectOfType<PanelManager>();
         this.gameManager = FindObjectOfType<GameManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         playerObject = GameObject.FindWithTag("Player");
         PlayerPosition = playerObject.transform.position;
         EnemyPosition = transform.position;
@@ -66,6 +68,7 @@ public class TracEnemy : MonoBehaviour
         if (hp <= 0)
         {
             Instantiate(Anim, transform.position, Quaternion.identity);
+            scoreManager.TracEnemyScoreAdd();
 
             gameManager.EnemyDefeat++;
             //確率でアイテムドロップ
