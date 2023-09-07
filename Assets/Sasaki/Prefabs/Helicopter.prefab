@@ -120,6 +120,8 @@ MonoBehaviour:
   Anim: {fileID: 1788954258549756650, guid: 337f031498180e847822432cdcad7f9d, type: 3}
   BulletAnim: {fileID: 6078986363207270423, guid: f8b5d6b786dcd6749a4bdf906befac69,
     type: 3}
+  BulletAnim2: {fileID: 2505371203994457535, guid: 81233e422fcaf2d4681911b26f884fbc,
+    type: 3}
   Bomb: {fileID: 5813056181169743457, guid: f11f168cca8649e4aa32baa682097636, type: 3}
   Battery: {fileID: 9037471193332821481, guid: 6a45256d3459464418ccc47d6c961084, type: 3}
   HelicopterBullet: {fileID: 3846281676282197554, guid: b63f072329e695d409e4c6418e4e1e3f,

@@ -8,6 +8,8 @@ public class Helicopter : MonoBehaviour
     GameObject Anim;
     [SerializeField]
     GameObject BulletAnim;
+    [SerializeField]
+    GameObject BulletAnim2;
     //ˆÚ“®ŠÖŒW
     private float cos;
     private float VerticalWidth = 6.0f;//‚’¼ˆÚ“®‚ÌXÀ•W
@@ -230,6 +232,7 @@ public class Helicopter : MonoBehaviour
         }
         if (collider2D.gameObject.tag == "Bullet2")
         {
+            Instantiate(BulletAnim2, collider2D.gameObject.transform.position, Quaternion.identity);
             Hp = Hp -= playerControll.Bullet2Power;
         }
         if (Hp <= -0)
