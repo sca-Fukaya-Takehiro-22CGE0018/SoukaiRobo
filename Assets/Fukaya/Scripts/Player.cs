@@ -166,6 +166,11 @@ public class Player : MonoBehaviour
                 AutoAttack = true;
             }
         }
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.UpArrow) && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            AttackInterval = 0.03f;
+        }
 
         //落下判定
         if (this.transform.position.y <= autoStage.leftBottom.y-3.0f)

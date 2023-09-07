@@ -16,6 +16,8 @@ public class ScoreManager : MonoBehaviour
     private int addBossScore = 300;
     private int addItemScore = 10;
     private int addTimeScore = 10;
+    public int addBonusScore = 0;
+    private int BossBonus = 0;
 
     private CountDownTimer countDownTimer;
     // Start is called before the first frame update
@@ -36,24 +38,36 @@ public class ScoreManager : MonoBehaviour
 
     }
 
+    public void BonusReset()
+    {
+        addBonusScore = 0;
+    }
+
     public void EnemyScoreAdd()
     {
         EnemyScore += addEnemyScore;
+        EnemyScore += addBonusScore;
+        addBonusScore += 10;
     }
 
     public void TracEnemyScoreAdd()
     {
         TracEnemyScore += addTracEnemyScore;
+        TracEnemyScore += addBonusScore;
+        addBonusScore += 10;
     }
 
     public void BossScoreAdd()
     {
-       BossScore += addBossScore;
+        BossBonus = addBonusScore/10;
+        BossScore += addBossScore*BossBonus;
+        addBonusScore = addBonusScore * 2;
     }
 
     public void ItemScoreAdd()
     {
         ItemScore += addItemScore;
+        ItemScore += addBonusScore;
     }
 
     public void TimeScoreCalculation()

@@ -236,7 +236,7 @@ public class Helicopter : MonoBehaviour
         {
             scoreManager.BossScoreAdd();
             autoStage.GameClear();
-            AnimPosition = new Vector3(transform.position.x-1.0f, transform.position.y + 1.0f, 0);
+            AnimPosition = new Vector3(transform.position.x-1.0f, autoStage.rightTop.y -2.0f, 0);
             Instantiate(Anim, AnimPosition, Quaternion.identity);
             Destroy(this.gameObject);
         }

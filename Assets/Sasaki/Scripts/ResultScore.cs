@@ -16,11 +16,11 @@ public class ResultScore : MonoBehaviour
     {
         ScoreManager.EnemyScoreCalculation();
         ScoreManager.TotalScoreCalculation();
-        EnemyScore.text = ScoreManager.EnemyScore.ToString("0000");
-        BossScore.text = ScoreManager.BossScore.ToString("0000");
-        ItemScore.text = ScoreManager.ItemScore.ToString("0000");
-        TimeScore.text = ScoreManager.TimeScore.ToString("0000");
-        TotalScore.text = ScoreManager.TotalScore.ToString("0000");
+        EnemyScore.text = ScoreManager.EnemyScore.ToString("00000");
+        BossScore.text = ScoreManager.BossScore.ToString("00000");
+        ItemScore.text = ScoreManager.ItemScore.ToString("00000");
+        TimeScore.text = ScoreManager.TimeScore.ToString("00000");
+        TotalScore.text = ScoreManager.TotalScore.ToString("00000");
     }
 
     // Update is called once per frame
